@@ -4,13 +4,55 @@
         <title>Random Swap</title>
       </head>
 <body>
-    
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+
+    <!-- <script>
+        console.log("wors")
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+        // The Metamask plugin also allows signing transactions to
+        // send ether and pay to change state within the blockchain.
+        // For this, you need the account signer...
+        const signer = provider.getSigner()
+
+        async function start(){
+            const block = await provider.getBlockNumber()
+            console.log(block)
+        }
+
+        start();
+    </script> -->
+
+    <script src="./swap.mjs" type="module"></script>
+    <!-- <script type="module">
+        import { ethers } from "https://cdn.ethers.io/lib/ethers-5.0.umd.min.js";
+        console.log("wors")
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+        // The Metamask plugin also allows signing transactions to
+        // send ether and pay to change state within the blockchain.
+        // For this, you need the account signer...
+        const signer = provider.getSigner()
+
+        async function start(){
+            const block = await provider.getBlockNumber()
+            console.log(block)
+        }
+
+        start();
+        // Your code here...
+        //import {ethers} from "http://localhost:8010/proxy"
+    </script> -->
     <header class="page-header">
-        <h1>Random Swap Fund</h1>
+        <h1>Random Swap</h1>
     </header>
 
-    <p>This is a paragraph.</p>
-    <p>This is another paragraph.</p>
+    <!-- <p>This is a paragraph.</p> -->
+    <!-- <p>This is another paragraph.</p> -->
+    <p>Swap BNB to ???</p>
+    <!-- <p>This is another paragraph.</p> -->
+    <button onclick="console.log('tete')">SWAP</button>
+
 
 </body>
 
