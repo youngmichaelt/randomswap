@@ -1,26 +1,58 @@
-//const { ethers } = require("ethers");
-//import { ethers } from "ethers";
 
-//import { ethers } from "https://cdn.ethers.io/lib/ethers-5.2.esm.min.js";
+async function mmConnect(){
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // Prompt user for account connections
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    console.log("Account:", await signer.getAddress());
+    // await window.ethereum.enable()
 
-console.log("working");
-// A Web3Provider wraps a standard Web3 provider, which is
-// what Metamask injects as window.ethereum into each page
-const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const web3 = new Web3(window.ethereum);
+    // get all accounts
+    // const accounts = await web3.eth.getAccounts();
+    // console.log(accounts)
 
-// The Metamask plugin also allows signing transactions to
-// send ether and pay to change state within the blockchain.
-// For this, you need the account signer...
-const signer = provider.getSigner()
+    // const web3Instance = new Web3(window['ethereum']);
 
-async function start(){
-    const block = await provider.getBlockNumber()
-    console.log(block)
+    
+    var isConnected = ethereum.isConnected();
+    console.log(isConnected);
+    console.log(apiTest(signer));
+
+};
+
+
+async function apiTest(provider){
+
+    address = "0xde336686ba638C545a46F58B3Dd46D0b9be23769";
+    const params = {
+        buyToken: 'DAI',
+        sellToken: 'ETH',
+        buyAmount: '10000000000000000', // Always denominated in wei
+    }
+    
+    const response = await fetch(
+        //`https://ropsten.api.0x.org/swap/v1/quote?${JSON.stringify(params)}`
+        `https://ropsten.api.0x.org/swap/v1/quote?sellToken=ETH&buyToken=DAI&buyAmount=3000000000000000000`
+        //`https://api.0x.org/swap/v1/quote?buyToken=DAI&sellToken=ETH&buyAmount=1000000000000000000`
+    );
+
+    const web3 = new Web3(window.ethereum);
+    let accounts = await web3.eth.getAccounts();
+    web3.eth.defaultAccount = accounts[0]
+
+    // const response = await fetch(`https://api.0x.org/swap/v0/quote?buyToken=DAI&sellToken=ETH&buyAmount=10000000000000000000`);
+
+    
+
+    await web3.eth.sendTransaction(await response.json());
+
+
+    
+
 }
-
-start();
-
+// console.log(apiTest());
 
 
 
-// module.exports = {swap};
+
