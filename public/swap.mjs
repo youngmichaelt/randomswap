@@ -30,7 +30,7 @@ async function mmConnect(){
 };
 
 
-async function swap(token1, token2, amount){
+async function swap(token1, token2, amount, tokens){
 
     // console.log(getTokens());
 
@@ -47,7 +47,13 @@ async function swap(token1, token2, amount){
     //     `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=`+token2+`&buyAmount=3000000000000000000`
     //     //`https://api.0x.org/swap/v1/quote?buyToken=DAI&sellToken=ETH&buyAmount=1000000000000000000`
     // );
-    url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=`+token2+`&sellAmount=`+amountInWei
+    url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`
+    +token1+`&buyToken=`
+    +token2+`&sellAmount=`
+    +amountInWei + `&feeRecipient=`
+    +`0xfC2782122A7870811bd5864Ea9C5c67F1d48e863`+`&buyTokenPercentageFee=`
+    +`0.5`
+    
     // url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=DAI&buyAmount=3000000000000000000`
 
     const web3 = new Web3(window.ethereum);
@@ -80,13 +86,22 @@ async function swap(token1, token2, amount){
                 console.log(token2)
 
                 document.getElementById('output').innerHTML = "Error: " + error.message;
+
+                document.getElementById('tokenAddress').innerHTML = tokens.address;
+                document.getElementById('tokenSymbol').innerHTML = tokens.symbol ;
+                document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
+
+                // console.log(tokens.address, tokens.symbol, tokens.decimals)
             }
             else {
                 // handling of successful transaction
                 console.log("success")
                 document.getElementById('output').innerHTML = "You received: " + token2;
+                document.getElementById('tokenAddress').innerHTML = tokens.address;
+                document.getElementById('tokenSymbol').innerHTML = tokens.symbol ;
+                document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
 
-                addToken();
+                // addToken();
 
             }})
       })
@@ -141,7 +156,8 @@ async function getTokens(){
     const tokens = []
 
     for (let i = 0; i < tokenResponse.records.length; i++) {
-        tokens[i] = tokenResponse.records[i].symbol
+        // tokens[i] = tokenResponse.records[i].symbol
+        tokens[i] = tokenResponse.records[i]
     }
     console.log(tokens);
 
@@ -149,25 +165,25 @@ async function getTokens(){
     var token1 = document.getElementById('token1').value;
     var coinIdx2 = Math.floor(Math.random() * tokens.length);
 
-    while (tokens[coinIdx2] == token1){
+    while (tokens[coinIdx2].symbol == token1){
         coinIdx2 = Math.floor(Math.random() * tokens.length);
     }
 
     //console.log("Swap token: ", tokens[coinIdx1])
     console.log("Swap from token: ", token1)
-    console.log("Swap to token: ", tokens[coinIdx2])
+    console.log("Swap to token: ", tokens[coinIdx2].symbol)
 
     const amount = document.getElementById('amountId').value
 
-    swap(token1,tokens[coinIdx2],amount)
+    swap(token1,tokens[coinIdx2].symbol,amount,tokens[coinIdx2])
 
 
 }
 
-async function addToken(tokenAddress, tokenSymbol, tokenDecimals, tokenImage){
-    const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
-    const tokenSymbol = 'TUT';
-    const tokenDecimals = 18;
+async function addToken(){
+    const tokenAddress = document.getElementById('tokenAddress').innerHTML;
+    const tokenSymbol = document.getElementById('tokenSymbol').innerHTML;
+    const tokenDecimals = document.getElementById('tokenDecimals').innerHTML;
     const tokenImage = 'http://placekitten.com/200/300';
 
     try {
@@ -180,7 +196,7 @@ async function addToken(tokenAddress, tokenSymbol, tokenDecimals, tokenImage){
             address: tokenAddress, // The address that the token is at.
             symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
             decimals: tokenDecimals, // The number of decimals in the token
-            image: tokenImage, // A string url of the token logo
+            // image: tokenImage, // A string url of the token logo
         },
         },
     });

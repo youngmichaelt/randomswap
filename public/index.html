@@ -12,49 +12,38 @@
   
 
     <script src="./swap.mjs" type="text/javascript"></script>
-    <!-- <script type="module">
-        import { ethers } from "https://cdn.ethers.io/lib/ethers-5.0.umd.min.js";
-        console.log("wors")
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-
-        // The Metamask plugin also allows signing transactions to
-        // send ether and pay to change state within the blockchain.
-        // For this, you need the account signer...
-        const signer = provider.getSigner()
-
-        async function start(){
-            const block = await provider.getBlockNumber()
-            console.log(block)
-        }
-
-        start();
-        // Your code here...
-        //import {ethers} from "http://localhost:8010/proxy"
-    </script> -->
-    <header class="page-header">
-        <h1>Random Swap</h1>
+    
+    <header class="page-header" style="text-align: center;">
+        <h1 style="display: inline-block;">Random Swap</h1>
     </header>
-
+    <div style="text-align: center;">
+        <div style="display: inline-block;">
+            <p>Swap ETH to ???</p>
+        <!-- <p>This is another paragraph.</p> -->
+            <form>
+                <label for="token1">Token to Swap</label>
+                <input type="text" id="token1" name="token1" value="ETH"><br><br>
+                <label for="amoundId">Amount to Swap</label>
+                <input type="text" id="amountId" name="amoundId" value="0.01"><br><br>
+                <!-- <label for="lname">Last name:</label>
+                <input type="text" id="lname" name="lname"><br><br> -->
+                <!-- <input type="submit" value="Submit"> -->
+            </form>
+            <button onclick="mmConnect()">Connect to MetaMask</button>
+            <button onclick="getTokens()">SWAP</button>
+            <button onclick="addToken()">Add to MetaMask</button>
+            <br>
+            <p id="currAccount"></p>
+            <br>
+            <p id="output"></p>
+        </div>
+    </div>
     <!-- <p>This is a paragraph.</p> -->
     <!-- <p>This is another paragraph.</p> -->
-    <p>Swap ETH to ???</p>
-    <!-- <p>This is another paragraph.</p> -->
-    <form>
-        <label for="token1">Token to Swap</label>
-        <input type="text" id="token1" name="token1" value="ETH"><br><br>
-        <label for="amoundId">Amount to Swap</label>
-        <input type="text" id="amountId" name="amoundId" value="1"><br><br>
-        <!-- <label for="lname">Last name:</label>
-        <input type="text" id="lname" name="lname"><br><br> -->
-        <!-- <input type="submit" value="Submit"> -->
-    </form>
-    <button onclick="mmConnect()">Connect to MetaMask</button>
-    <button onclick="getTokens()">SWAP</button>
-    <button onclick="addToken()">add</button>
-    <br>
-    <p id="currAccount"></p>
-    <br>
-    <p id="output"></p>
+    
+    <p hidden id="tokenAddress"></p>
+    <p hidden id="tokenSymbol"></p>
+    <p hidden id="tokenDecimals"></p>
 
 
 </body>
