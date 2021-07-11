@@ -1,4 +1,16 @@
 
+window.addEventListener("load", async function() {
+    const web3 = new Web3(window.ethereum);
+    let accounts = await web3.eth.getAccounts();
+    web3.eth.defaultAccount = accounts[0];
+    document.getElementById('currAccount').innerHTML = accounts[0];
+
+})
+
+
+
+
+
 async function mmConnect(){
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     // Prompt user for account connections
@@ -18,7 +30,7 @@ async function mmConnect(){
 };
 
 
-async function swap(token1, token2){
+async function swap(token1, token2, amount){
 
     // console.log(getTokens());
 
@@ -26,21 +38,22 @@ async function swap(token1, token2){
     const params = {
         buyToken: token1,
         sellToken: token2,
-        buyAmount: '10000000000000000', // Always denominated in wei
+        buyAmount: '1000000000000000000', // Always denominated in wei
     }
-    
+    const amountInWei = amount * 1000000000000000000
     
     // const response = await fetch(
     //     //`https://ropsten.api.0x.org/swap/v1/quote?${JSON.stringify(params)}`
     //     `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=`+token2+`&buyAmount=3000000000000000000`
     //     //`https://api.0x.org/swap/v1/quote?buyToken=DAI&sellToken=ETH&buyAmount=1000000000000000000`
     // );
-    // url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=`+token2+`&buyAmount=3000000000000000000`
-    url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=DAI&buyAmount=3000000000000000000`
+    url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=`+token2+`&sellAmount=`+amountInWei
+    // url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=DAI&buyAmount=3000000000000000000`
 
     const web3 = new Web3(window.ethereum);
     let accounts = await web3.eth.getAccounts();
     web3.eth.defaultAccount = accounts[0]
+    console.log(web3.eth.defaultAccount)
 
     const response = await fetch(url).then((response) => {
         if (response.ok) {
@@ -72,6 +85,9 @@ async function swap(token1, token2){
                 // handling of successful transaction
                 console.log("success")
                 document.getElementById('output').innerHTML = "You received: " + token2;
+
+                addToken();
+
             }})
       })
       .catch((error) => {
@@ -120,7 +136,7 @@ async function getTokens(){
     const tokenResponse = await response.json()
     //return tokens['symbol']
     console.log(tokenResponse);
-    console.log(tokenResponse.records[0].symbol)
+    // console.log(tokenResponse.records[0].symbol)
 
     const tokens = []
 
@@ -141,14 +157,42 @@ async function getTokens(){
     console.log("Swap from token: ", token1)
     console.log("Swap to token: ", tokens[coinIdx2])
 
-    swap(token1,tokens[coinIdx2])
+    const amount = document.getElementById('amountId').value
+
+    swap(token1,tokens[coinIdx2],amount)
 
 
+}
 
+async function addToken(tokenAddress, tokenSymbol, tokenDecimals, tokenImage){
+    const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
+    const tokenSymbol = 'TUT';
+    const tokenDecimals = 18;
+    const tokenImage = 'http://placekitten.com/200/300';
 
+    try {
+    // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+    const wasAdded = await ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+        type: 'ERC20', // Initially only supports ERC20, but eventually more!
+        options: {
+            address: tokenAddress, // The address that the token is at.
+            symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+            decimals: tokenDecimals, // The number of decimals in the token
+            image: tokenImage, // A string url of the token logo
+        },
+        },
+    });
 
-
-
+    if (wasAdded) {
+        console.log('Thanks for your interest!');
+    } else {
+        console.log('Your loss!');
+    }
+    } catch (error) {
+    console.log(error);
+    }
 }
 
 
