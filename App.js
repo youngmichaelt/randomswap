@@ -24,6 +24,18 @@ app.get('/', function (req, res) {
    //console.log(swap)
    
 })
+app.get('/test', function (req, res) {
+    //res.send('Hello World');
+    res.sendFile('/Users/mac/Desktop/randomswap/public/test.html');
+     
+ 
+         
+             
+ 
+    //swap;
+    //console.log(swap)
+    
+ })
 
 
 

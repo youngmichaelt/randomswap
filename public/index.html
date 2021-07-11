@@ -5,7 +5,8 @@
       </head>
 <body>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/3.0.0-rc.5/web3.min.js"></script>
 
 
   
@@ -36,9 +37,19 @@
 
     <!-- <p>This is a paragraph.</p> -->
     <!-- <p>This is another paragraph.</p> -->
-    <p>Swap BNB to ???</p>
+    <p>Swap ETH to ???</p>
     <!-- <p>This is another paragraph.</p> -->
-    <button onclick="mmConnect()">SWAP</button>
+    <form>
+        <label for="token1">Token</label>
+        <input type="text" id="token1" name="token1" value="ETH"><br><br>
+        <!-- <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname"><br><br> -->
+        <!-- <input type="submit" value="Submit"> -->
+    </form>
+    <button onclick="mmConnect()">Connect to MetaMask</button>
+    <button onclick="getTokens()">SWAP</button>
+    <br>
+    <p id="output"></p>
 
 
 </body>
