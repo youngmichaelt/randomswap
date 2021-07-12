@@ -90,6 +90,9 @@ async function swap(token1, token2, amount, tokens) {
                     document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
                     document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
 
+                    console.log(amount)
+                    console.log('towlr')
+
                     // console.log(tokens.address, tokens.symbol, tokens.decimals)
                 } else {
                     // handling of successful transaction
@@ -98,6 +101,8 @@ async function swap(token1, token2, amount, tokens) {
                     document.getElementById('tokenAddress').innerHTML = tokens.address;
                     document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
                     document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
+
+                    //function to insert data in mongodb 
 
                     // addToken();
 
