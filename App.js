@@ -1,11 +1,32 @@
 var express = require('express');
 var app = express();
 var cors = require('cors')
-var stringify = require('qs-stringify')
-var qs = require('qs');
-var mongo = require('mongodb');
-//const swap = require('./swap.js');
+var stringify = require('qs-stringify');
+var path = require('path');
 
+var qs = require('qs');
+// var mongo = require('mongodb');
+require('./model');
+var mongoose = require('mongoose');
+
+var bodyParser = require('body-parser')
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+
+//const swap = require('./swap.js');'
+
+var txn = mongoose.model('txn');
+
+mongoose.connect('mongodb://localhost:27017/swapdb', { useNewUrlParser: true, useUnifiedTopology: true });
 app.use(cors())
 
 
@@ -13,7 +34,18 @@ app.use(express.static('public'));
 
 app.get('/', function(req, res) {
     //res.send('Hello World');
-    res.sendFile('public/index.html');
+    // res.sendFile('public/index.html');
+    var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
+    query.exec(function(err, docs) {
+        console.log(docs);
+        // res.send(docs);
+        res.render('index.ejs', { docs: docs });
+    });
+
+    // res.render('index.ejs', { docs: docs });
+    // res.render('public/index.ejs')
+
+
 
 
     //swap;
@@ -26,6 +58,47 @@ app.get('/test', function(req, res) {
     //swap;
     //console.log(swap)
 
+})
+
+app.get('/txn', function(req, res) {
+    let newtxn = new txn({
+        address: "test",
+        token1: "test",
+        token2: "test",
+        amount: "test"
+    })
+    newtxn.save();
+
+    // newtxn.save(function(err) {
+    //     next(err, newtxn);
+    // });
+})
+
+app.post('/txn', function(req, res) {
+
+    console.log(req.body);
+    console.log(req.body.address);
+    let newtxn = new txn({
+        address: req.body.address,
+        token1: req.body.token1,
+        token2: req.body.token2,
+        amount: req.body.amount,
+        success: req.body.success
+    })
+    newtxn.save();
+    res.send({ status: 'SUCCESS' });
+    // newtxn.save();
+
+    // newtxn.save(function(err) {
+    //     next(err, newtxn);
+    // });
+})
+
+app.get('/lasttxn', function(req, res) {
+    var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
+    query.exec(function(err, docs) {
+        console.log(docs);
+    });
 })
 
 

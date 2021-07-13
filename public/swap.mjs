@@ -6,6 +6,10 @@ window.addEventListener("load", async function() {
 
 })
 
+// console.log(<%= docs %>)
+
+
+
 
 
 
@@ -93,6 +97,8 @@ async function swap(token1, token2, amount, tokens) {
                     console.log(amount)
                     console.log('towlr')
 
+                    postTxn(web3.eth.defaultAccount, token1, token2, amount, "false");
+
                     // console.log(tokens.address, tokens.symbol, tokens.decimals)
                 } else {
                     // handling of successful transaction
@@ -103,6 +109,8 @@ async function swap(token1, token2, amount, tokens) {
                     document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
 
                     //function to insert data in mongodb 
+                    postTxn(web3.eth.defaultAccount, token1, token2, amount, "true");
+
 
                     // addToken();
 
@@ -213,4 +221,25 @@ async function addToken() {
     } catch (error) {
         console.log(error);
     }
+}
+
+function postTxn(address, token1, token2, amount, success) {
+    let data = {
+        address: address,
+        token1: token1,
+        token2: token2,
+        amount: amount,
+        success: success
+    };
+
+    fetch("/txn", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(data)
+    }).then(res => {
+        console.log("Request complete! response:", res);
+    });
 }
