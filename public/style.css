@@ -11,7 +11,6 @@ pre,
 form,
 body,
 html,
-p,
 blockquote,
 fieldset,
 input {
@@ -19,8 +18,20 @@ input {
     padding: 0;
 }
 
+input {
+    font-size: 15px;
+}
+
+label {
+    font: 20px Helvetica;
+}
+
+form {
+    padding-top: 5px;
+}
+
 body {
-    font: 14px Georgia, serif;
+    font: 20px Helvetica;
     background-image: url("../images/bg.jpg");
     padding-bottom: 40px;
 }
@@ -133,8 +144,8 @@ h2 a:hover {
 }
 
 .dialog h3 {
-    height: 29px;
-    font-size: 16px;
+    height: 32px;
+    font-size: 18px;
     color: #eee;
     text-shadow: 1px 0px 1px #0a2b96;
     padding: 5px 0 0 10px;
@@ -156,13 +167,9 @@ h2 a:hover {
     color: #000 !important;
 } */
 
-.button {
-    text-decoration: none;
-    color: #000;
-    display: block;
-    margin: 0 auto;
-    width: 75px;
-    height: 20px;
-    border: 1px solid black;
-    text-align: center;
+button {
+    font-size: 15px;
+    /* width: 75px; */
+    height: 50px;
+    display: inline-block;
 }

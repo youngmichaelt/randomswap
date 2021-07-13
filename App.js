@@ -54,7 +54,8 @@ app.get('/', function(req, res) {
 })
 app.get('/test', function(req, res) {
     //res.send('Hello World');
-    res.sendFile('/Users/mac/Desktop/randomswap/public/test.html');
+    // res.sendFile('/Users/mac/Desktop/randomswap/public/test.html');
+    res.render('test.ejs');
     //swap;
     //console.log(swap)
 
