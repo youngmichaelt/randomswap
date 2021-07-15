@@ -36,10 +36,22 @@ app.get('/', function(req, res) {
     //res.send('Hello World');
     // res.sendFile('public/index.html');
     var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
-    query.exec(function(err, docs) {
-        console.log(docs);
+    query.exec(function(err, txns) {
+        console.log(txns.length);
+
+        // const txnList = []
+
+        // for (i = 0; i < txns.length; i++) {
+        //     temp = []
+        //     temp.push(txns[i].address)
+        //     temp.push(txns[i].token1)
+        //     temp.push(txns[i].token2)
+        //     temp.push(txns[i].amount)
+        //     txnList.push(temp)
+        // }
+        // console.log(docs[0].token1)
         // res.send(docs);
-        res.render('index.ejs', { docs: docs });
+        res.render('refactor.ejs', { txns: txns });
     });
 
     // res.render('index.ejs', { docs: docs });

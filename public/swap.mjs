@@ -1,10 +1,31 @@
-window.addEventListener("load", async function() {
-    const web3 = new Web3(window.ethereum);
-    let accounts = await web3.eth.getAccounts();
-    web3.eth.defaultAccount = accounts[0];
-    document.getElementById('currAccount').innerHTML = accounts[0];
+// window.addEventListener("load", async function() {
+//     const web3 = new Web3(window.ethereum);
+//     let accounts = await web3.eth.getAccounts();
+//     web3.eth.defaultAccount = accounts[0];
+//     // document.getElementById('currAccount').innerHTML = accounts[0];
 
-})
+//     // const txns = document.getElementById('txns').innerHTML;
+//     // console.log(txns);
+//     // console.log(txns.length);
+
+//     var txns = <%-JSON.stringify(txns)%>;
+//     console.log(txns);
+
+
+
+
+
+//     let table = document.getElementById('txnTable');
+//     for (i = 0; i < txns.length; i++) {
+//         var row = table.insertRow(i);
+//         row.insertCell(0).innerHTML = txns[i].address;
+//         row.insertCell(1).innerHTML = txns[i].token1;
+//         row.insertCell(2).innerHTML = txns[i].token2;
+//         row.insertCell(3).innerHTML = txns[i].amount;
+
+//     }
+
+// })
 
 // console.log(<%= docs %>)
 
