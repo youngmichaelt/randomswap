@@ -9,7 +9,10 @@ window.addEventListener("load", async function() {
 // console.log(<%= docs %>)
 
 
-
+function togglePopup(token) {
+    document.getElementById("popup-1").classList.toggle("active");
+    document.getElementById("popupTitle").innerHTML = "You got " + token;
+}
 
 
 
@@ -108,10 +111,12 @@ async function swap(token1, token2, amount, tokens) {
                     document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
                     document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
 
+
+
                     //function to insert data in mongodb 
                     postTxn(web3.eth.defaultAccount, token1, token2, amount, "true");
 
-
+                    togglePopup(token2);
                     // addToken();
 
                 }

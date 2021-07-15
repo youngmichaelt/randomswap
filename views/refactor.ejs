@@ -16,21 +16,29 @@
 
     <script src="./swap.mjs" type="text/javascript"></script>
 
-    <header class="page-header" style="text-align: center;">
-        <h1>
+    <header class="page-header" style="text-align: center;">Random Swap
+        <!-- <img src="https://img.icons8.com/ios/452/ethereum.png"></img> -->
+        <!-- <h1>
             Random Swap
-        </h1>
+        </h1> -->
+        <select id="network">
+            <option value="ETH">ETH</option>
+            <option value="BSC">BSC</option>
+            
+        </select>
     </header>
     <div style="text-align: center;">
         <p>Swap ??? to ???</p>
-        <div style="display: inline-block;">
+        <div style="text-align: center;">
             <!-- <p id="swapP">Swap ??? to ???</p> -->
             <!-- <p>This is another paragraph.</p> -->
-            <form>
+            <form style="text-align: center;">
                 <label for="token1">Token to Swap</label>
-                <input type="text" id="token1" name="token1" value="ETH"><br><br>
+                <input type="text" id="token1" name="token1" value="ETH">
+                <!-- <br><br> -->
                 <label for="amoundId">Amount to Swap</label>
-                <input type="text" id="amountId" name="amoundId" value="0.01"><br><br>
+                <input type="text" id="amountId" name="amoundId" value="0.01">
+                <!-- <br><br> -->
                 <!-- <label for="lname">Last name:</label>
                     <input type="text" id="lname" name="lname"><br><br> -->
                 <!-- <input type="submit" value="Submit"> -->
@@ -40,11 +48,40 @@
             <button id="swapButton" onclick="getTokens()">SWAP</button>
             <button id="addTokenButton" onclick="addToken()">Add to MetaMask</button>
             <br>
-            <p id="currAccount"></p>
+            <!-- <p id="currAccount"></p> -->
             <!-- <br> -->
             <p id="output"></p>
         </div>
+        <table id="txnTable">
+            <caption>Recent Swaps</caption>
+            <!-- <tr>
+                <th>Address</th>
+                <th>Token</th>
+                <th>Token</th>
+            </tr> -->
+            <tr>
+                <td>0xde336686ba638C545a46F58B3Dd46D0b9be23769</td>
+                <td>ETH</td>
+                <td>DAI</td>
+                <td>0.01</td>
+            </tr>
+
+
+        </table>
+        <div class="popup" id="popup-1">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="togglePopup()">×</div>
+                <h1 id="popupTitle">You got ETH!</h1>
+                <button onclick="addToken()">Add token to metamask</button>
+
+            </div>
+        </div>
+
+        <!-- <button onclick="togglePopup()">Show Popup</button> -->
+
     </div>
+
     <!-- <p>This is a paragraph.</p> -->
     <!-- <p>This is another paragraph.</p> -->
 
