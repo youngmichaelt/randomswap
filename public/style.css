@@ -32,8 +32,18 @@ form {
 
 body {
     font: 20px Helvetica;
-    background-image: url("../images/bg.jpg");
     padding-bottom: 40px;
+}
+
+#computer {
+    /* width: 100px;
+    height: 1500px; */
+    /* background-image: "public/computer.png"; */
+    /* background-repeat: no-repeat; */
+    /* background-size: contain; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 
 h1 {

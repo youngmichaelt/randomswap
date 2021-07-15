@@ -1,0 +1,91 @@
+@font-face {
+    font-family: Delicious;
+    /* src: url('./LemonadeStand-J0Ln.ttf'); */
+    src: url('./Trashfort-vmAX7.ttf');
+}
+
+
+/* body {
+    font-family: Delicious;
+    font-size: 28px;
+} */
+
+body {
+    background-image: url("https://static.vecteezy.com/system/resources/previews/002/078/291/large_2x/crumpled-paper-background-free-photo.jpg");
+    background-size: cover;
+}
+
+h1 {
+    font-family: Delicious;
+    font-size: 72px;
+    font-weight: bold;
+}
+
+p {
+    font-family: Delicious;
+    font-size: 40px;
+}
+
+#swapP {
+    font-size: 48px;
+}
+
+label {
+    font-family: Delicious;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+input {
+    font-family: Delicious;
+    font-size: 40px;
+    margin-left: 10px;
+}
+
+button {
+    font-family: Delicious;
+    font-size: 32px;
+    padding: 8px;
+    margin: 10px;
+    /* text-align: center; */
+}
+
+#connectButton {
+    margin-top: 10px;
+    margin-right: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#swapButton {
+    width: 200px;
+    font-size: 38px;
+}
+
+#addTokenButton {
+    display: none;
+}
+
+
+/* #computerImage { */
+
+
+/* width: 50vw;
+    height: 50vh; */
+
+
+/* width: 100%;
+    height: 100%;
+    background-image: url("https://www.maxpixel.net/static/photo/1x/Screen-Monitor-Samsung-Tv-Internet-Communication-1065137.png");
+    background-repeat: no-repeat;
+    background-position: center; */
+
+
+/* background-attachment: fixed; */
+
+
+/* background-size: contain; */
+
+
+/* } */

@@ -61,6 +61,10 @@ app.get('/test', function(req, res) {
 
 })
 
+app.get('/refactor', function(req, res) {
+    res.render('refactor.ejs');
+})
+
 app.get('/txn', function(req, res) {
     let newtxn = new txn({
         address: "test",

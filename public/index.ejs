@@ -54,3 +54,39 @@
 </body>
 
 </html>
+
+<div id="windowsxp">
+    <div id="errordialog" class="dialog" style="text-align: center;">
+        <h3>Swap</h3>
+        <!-- <img src="http://demo.marcofolio.net/winxp_error/images/error.png" alt="Error image"> -->
+
+        <!-- <div style="text-align: center;"> -->
+        <!-- <p>Swap ETH to ???</p> -->
+        <!-- <p>This is another paragraph.</p> -->
+        <p></p>
+        <form>
+            <label for="token1">Token to Swap</label>
+            <input type="text" id="token1" name="token1" value="ETH"><br><br>
+            <label for="amoundId">Amount to Swap</label>
+            <input type="text" id="amountId" name="amoundId" value="0.01"><br><br>
+            <!-- <label for="lname">Last name:</label>
+                <input type="text" id="lname" name="lname"><br><br> -->
+            <!-- <input type="submit" value="Submit"> -->
+        </form>
+        <button onclick="mmConnect()">Connect to MetaMask</button>
+        <button onclick="getTokens()">SWAP</button>
+        <button onclick="addToken()">Add to MetaMask</button>
+        <br>
+        <p id="currAccount"></p>
+        <br>
+        <p id="output"></p>
+        <!-- </div> -->
+
+
+        <!-- <p><a href="http://www.marcofolio.net/" title="Marcofolio.net" target="_blank" class="button">Get me out!</a></p> -->
+    </div>
+    <p hidden id="tokenAddress"></p>
+    <p hidden id="tokenSymbol"></p>
+    <p hidden id="tokenDecimals"></p>
+
+</div>

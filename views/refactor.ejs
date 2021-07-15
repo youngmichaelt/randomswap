@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./stylerefactor.css">
+
+    <title>Random Swap</title>
+</head>
+
+<body>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/3.0.0-rc.5/web3.min.js"></script>
+
+
+
+
+    <script src="./swap.mjs" type="text/javascript"></script>
+
+    <header class="page-header" style="text-align: center;">
+        <h1>
+            Random Swap
+        </h1>
+    </header>
+    <div style="text-align: center;">
+        <p>Swap ??? to ???</p>
+        <div style="display: inline-block;">
+            <!-- <p id="swapP">Swap ??? to ???</p> -->
+            <!-- <p>This is another paragraph.</p> -->
+            <form>
+                <label for="token1">Token to Swap</label>
+                <input type="text" id="token1" name="token1" value="ETH"><br><br>
+                <label for="amoundId">Amount to Swap</label>
+                <input type="text" id="amountId" name="amoundId" value="0.01"><br><br>
+                <!-- <label for="lname">Last name:</label>
+                    <input type="text" id="lname" name="lname"><br><br> -->
+                <!-- <input type="submit" value="Submit"> -->
+            </form>
+            <!-- <button onclick="testPost()">POST</button> -->
+            <button id="connectButton" onclick="mmConnect()">Connect to MetaMask</button>
+            <button id="swapButton" onclick="getTokens()">SWAP</button>
+            <button id="addTokenButton" onclick="addToken()">Add to MetaMask</button>
+            <br>
+            <p id="currAccount"></p>
+            <!-- <br> -->
+            <p id="output"></p>
+        </div>
+    </div>
+    <!-- <p>This is a paragraph.</p> -->
+    <!-- <p>This is another paragraph.</p> -->
+
+    <p hidden id="tokenAddress"></p>
+    <p hidden id="tokenSymbol"></p>
+    <p hidden id="tokenDecimals"></p>
+
+
+</body>
+
+</html>
