@@ -35,7 +35,8 @@ app.use(express.static('public'));
 app.get('/', function(req, res) {
     //res.send('Hello World');
     // res.sendFile('public/index.html');
-    var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
+    // var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
+    var query = txn.find({}, null, { limit: 10, sort: { _id: -1 } })
     query.exec(function(err, txns) {
         console.log(txns.length);
 
