@@ -1,35 +1,3 @@
-// window.addEventListener("load", async function() {
-//     const web3 = new Web3(window.ethereum);
-//     let accounts = await web3.eth.getAccounts();
-//     web3.eth.defaultAccount = accounts[0];
-//     // document.getElementById('currAccount').innerHTML = accounts[0];
-
-//     // const txns = document.getElementById('txns').innerHTML;
-//     // console.log(txns);
-//     // console.log(txns.length);
-
-//     var txns = <%-JSON.stringify(txns)%>;
-//     console.log(txns);
-
-
-
-
-
-//     let table = document.getElementById('txnTable');
-//     for (i = 0; i < txns.length; i++) {
-//         var row = table.insertRow(i);
-//         row.insertCell(0).innerHTML = txns[i].address;
-//         row.insertCell(1).innerHTML = txns[i].token1;
-//         row.insertCell(2).innerHTML = txns[i].token2;
-//         row.insertCell(3).innerHTML = txns[i].amount;
-
-//     }
-
-// })
-
-// console.log(<%= docs %>)
-
-
 function togglePopup(token) {
     document.getElementById("popup-1").classList.toggle("active");
     document.getElementById("popupTitle").innerHTML = "You got " + token;
@@ -87,7 +55,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             token2 + `&sellAmount=` +
             amountInWei + `&feeRecipient=` +
             `0xfC2782122A7870811bd5864Ea9C5c67F1d48e863` + `&buyTokenPercentageFee=` +
-            `0.5`
+            `0.015`
 
         // url = `https://bsc.api.0x.org/swap/v1/quote?sellToken=BNB&buyToken=1INCH&buyAmount=10000000000000000`
 
@@ -216,17 +184,19 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             //     console.log(data);
             // })
 
-
+        feeAddress = "0xfC2782122A7870811bd5864Ea9C5c67F1d48e863";
 
 
 
         url = `https://api.1inch.exchange/v3.0/56/swap?fromTokenAddress=` +
             token1 + `&toTokenAddress=` +
             tokens.address + `&amount=` +
-            amountInWei + "&fromAddress=" + web3.eth.defaultAccount + "&slippage=1"
-            // `&feeRecipient=` +
-            // `0xfC2782122A7870811bd5864Ea9C5c67F1d48e863` + `&buyTokenPercentageFee=` +
-            // `0.5`
+            amountInWei + "&fee=1.5" + "&fromAddress=" + web3.eth.defaultAccount + "&slippage=1&" +
+            "referrerAddress=" + feeAddress
+
+        // `&feeRecipient=` +
+        // `0xfC2782122A7870811bd5864Ea9C5c67F1d48e863` + `&buyTokenPercentageFee=` +
+        // `0.5`
 
         // url = `https://bsc.api.0x.org/swap/v1/quote?sellToken=BNB&buyToken=1INCH&buyAmount=10000000000000000`
 
@@ -426,7 +396,7 @@ async function getTokens() {
         console.log(tokens);
 
 
-        var token1 = document.getElementById('token1').value;
+        var token1 = document.getElementById('tokenSelect').value;
         var coinIdx2 = Math.floor(Math.random() * tokens.length);
 
         while (tokens[coinIdx2].symbol == token1) {
@@ -471,7 +441,7 @@ async function getTokens() {
         console.log(tokens);
 
 
-        var token1 = document.getElementById('token1').value;
+        var token1 = document.getElementById('tokenSelect').value;
         var coinIdx2 = Math.floor(Math.random() * tokens.length);
 
         while (tokens[coinIdx2].symbol == token1) {

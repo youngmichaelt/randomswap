@@ -34,7 +34,12 @@
             <!-- <p>This is another paragraph.</p> -->
             <form style="text-align: center;">
                 <label for="token1">Token to Swap</label>
-                <input type="text" id="token1" name="token1" value="ETH">
+                <!-- <input type="text" id="token1" name="token1" value="ETH"> -->
+                <select id="tokenSelect">
+                        <!-- <option value="BSC">BSC</option>
+                        <option value="ETH">ETH</option> -->
+                        
+                </select>
                 <!-- <br><br> -->
                 <label for="amoundId">Amount to Swap</label>
                 <input type="text" id="amountId" name="amoundId" value="0.01">
@@ -105,7 +110,13 @@
     </p>
 
     <script type='text/javascript'>
+        ethTokens = ['ETH', 'DAI', 'WETH']
+        bscTokens = ['BNB', '1INCH', 'NUTS']
         window.addEventListener("load", async function() {
+
+            ethTokens = ['ETH', 'DAI', 'WETH']
+            bscTokens = ['BNB', '1INCH', 'NUTS']
+
             const web3 = new Web3(window.ethereum);
             let accounts = await web3.eth.getAccounts();
             web3.eth.defaultAccount = accounts[0];
@@ -132,7 +143,83 @@
 
             }
 
+            let network = document.getElementById('network').value
+
+
+            if (network == "ETH") {
+
+                select = document.getElementById('tokenSelect');
+
+                for (var i = 0; i < ethTokens.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = ethTokens[i];
+                    opt.innerHTML = ethTokens[i];
+                    select.appendChild(opt);
+                }
+
+            } else {
+                select = document.getElementById('tokenSelect');
+
+                for (var i = 0; i < bscTokens.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = bscTokens[i];
+                    opt.innerHTML = bscTokens[i];
+                    select.appendChild(opt);
+                }
+            }
+
+
         })
+
+        let network = document.getElementById('network')
+
+        document.getElementById('network').onchange = function() {
+            // ethTokens = ['ETH', 'DAI', 'WETH']
+            // bscTokens = ['BNB', '1INCH', 'NUTS']
+            select = document.getElementById('tokenSelect')
+            for (i = 0; i < select.length; i++) {
+                select.remove(select.length - 1);
+            }
+            console.log(network.value)
+
+            if (document.getElementById('network').value == "ETH") {
+                select = document.getElementById('tokenSelect');
+                console.log(select)
+
+                console.log(ethTokens)
+
+
+                for (var i = 0; i < ethTokens.length; i++) {
+                    if (i == 0) {
+                        var opt = select.options[0]
+                        opt.value = ethTokens[i];
+                        opt.innerHTML = ethTokens[i];
+                    } else {
+                        var opt = document.createElement('option');
+                        opt.value = ethTokens[i];
+                        opt.innerHTML = ethTokens[i];
+                        select.appendChild(opt);
+                    }
+
+                }
+
+            } else {
+                select = document.getElementById('tokenSelect');
+
+                for (var i = 0; i < bscTokens.length; i++) {
+                    if (i == 0) {
+                        var opt = select.options[0]
+                        opt.value = bscTokens[i];
+                        opt.innerHTML = bscTokens[i];
+                    } else {
+                        var opt = document.createElement('option');
+                        opt.value = bscTokens[i];
+                        opt.innerHTML = bscTokens[i];
+                        select.appendChild(opt);
+                    }
+                }
+            }
+        }
     </script>
 
 

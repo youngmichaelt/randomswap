@@ -38,7 +38,7 @@ app.get('/', function(req, res) {
     // var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
     var query = txn.find({}, null, { limit: 10, sort: { _id: -1 } })
     query.exec(function(err, txns) {
-        console.log(txns.length);
+        // console.log(txns.length);
 
         // const txnList = []
 
