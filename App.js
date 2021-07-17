@@ -52,7 +52,7 @@ app.get('/', function(req, res) {
         // }
         // console.log(docs[0].token1)
         // res.send(docs);
-        res.render('refactor.ejs', { txns: txns });
+        res.render('index.ejs', { txns: txns });
     });
 
     // res.render('index.ejs', { docs: docs });

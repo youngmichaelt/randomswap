@@ -4,6 +4,12 @@ function togglePopup(token) {
     // document.getElementById("popupSymbol").innerHTML = "Symbol: " + token;
 }
 
+function popupWarning() {
+    document.getElementById("warningPopup").classList.toggle("active");
+    //document.getElementById("popupTitle").innerHTML = "Make sure you are on correct network in MetaMask before swapping!";
+    // document.getElementById("popupSymbol").innerHTML = "Symbol: " + token;
+}
+
 
 
 
@@ -394,6 +400,12 @@ async function getTokens() {
             tokens[i] = tokenResponse.records[i]
         }
         console.log(tokens);
+        // arr = []
+        // for (var i = 0; i < tokens.length; i++) {
+        //     arr.push(tokens[i].symbol)
+        // }
+        // console.log(arr)
+
 
 
         var token1 = document.getElementById('tokenSelect').value;
@@ -439,6 +451,12 @@ async function getTokens() {
         //     tokens[i] = tokenResponse.tokens[key]
         // }
         console.log(tokens);
+
+        // arr = []
+        // for (var i = 0; i < tokens.length; i++) {
+        //     arr.push(tokens[i].symbol)
+        // }
+        // console.log(arr)
 
 
         var token1 = document.getElementById('tokenSelect').value;
