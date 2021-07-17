@@ -10,6 +10,14 @@ function popupWarning() {
     // document.getElementById("popupSymbol").innerHTML = "Symbol: " + token;
 }
 
+function popupMobile() {
+    document.getElementById("mobilePopup").classList.toggle("active");
+    //document.getElementById("popupTitle").innerHTML = "Make sure you are on correct network in MetaMask before swapping!";
+    // document.getElementById("popupSymbol").innerHTML = "Symbol: " + token;
+}
+
+
+
 
 
 
@@ -43,7 +51,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
 
 
 
-        address = "0xde336686ba638C545a46F58B3Dd46D0b9be23769";
+        //address = "0xde336686ba638C545a46F58B3Dd46D0b9be23769";
+        feeAddress = "0xfC2782122A7870811bd5864Ea9C5c67F1d48e863";
         const params = {
             buyToken: token1,
             sellToken: token2,
@@ -60,7 +69,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             token1 + `&buyToken=` +
             token2 + `&sellAmount=` +
             amountInWei + `&feeRecipient=` +
-            `0xfC2782122A7870811bd5864Ea9C5c67F1d48e863` + `&buyTokenPercentageFee=` +
+            feeAddress + `&buyTokenPercentageFee=` +
             `0.015`
 
         // url = `https://bsc.api.0x.org/swap/v1/quote?sellToken=BNB&buyToken=1INCH&buyAmount=10000000000000000`
@@ -75,7 +84,9 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                     return response.json();
                 } else {
                     response.text().then((text) => {
-                        document.getElementById('output').innerHTML = "Error: " + text;
+                        // document.getElementById('output').innerHTML = "Error: " + text;
+                        document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+
                         throw new Error(text)
                     });
                     throw new Error('Something went wrong');
@@ -94,7 +105,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         console.log("error")
                         console.log(token2)
 
-                        document.getElementById('output').innerHTML = "Error: " + error.message;
+                        document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
 
                         document.getElementById('tokenAddress').innerHTML = tokens.address;
                         document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
@@ -116,8 +127,11 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
 
 
 
+
                         //function to insert data in mongodb 
                         postTxn(web3.eth.defaultAccount, token1, token2, amount, "true");
+                        //closes popup warning
+                        popupWarning();
 
                         togglePopup(token2);
                         // addToken();
@@ -128,7 +142,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             .catch((error) => {
                 console.log(error)
             });
-    } else {
+    }
+    if (network == "BSC") {
         console.log(network);
         console.log(token1)
         console.log(tokens)
@@ -219,7 +234,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 return data.json();
             } else {
                 data.text().then((text) => {
-                    document.getElementById('output').innerHTML = "Error: " + text;
+                    document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+
                     throw new Error(text)
                 });
                 throw new Error('Something went wrong');
@@ -248,7 +264,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 console.log("error")
                 console.log(token2)
 
-                document.getElementById('output').innerHTML = "Error: " + error.message;
+                document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
 
                 document.getElementById('tokenAddress').innerHTML = tokens.address;
                 document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
@@ -272,6 +288,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
 
                 //function to insert data in mongodb 
                 postTxn(web3.eth.defaultAccount, tokenName, token2, ogAmount, "true");
+                //closes popup warning
+                popupWarning();
 
                 togglePopup(token2);
                 // addToken();
@@ -340,6 +358,102 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
         //         console.log(error)
         //     });
 
+    }
+    if (network == "Ropsten") {
+
+
+
+        //address = "0xde336686ba638C545a46F58B3Dd46D0b9be23769";
+        feeAddress = "0xfC2782122A7870811bd5864Ea9C5c67F1d48e863";
+        const params = {
+            buyToken: token1,
+            sellToken: token2,
+            buyAmount: '1000000000000000000', // Always denominated in wei
+        }
+        const amountInWei = amount * 1000000000000000000
+
+        // const response = await fetch(
+        //     //`https://ropsten.api.0x.org/swap/v1/quote?${JSON.stringify(params)}`
+        //     `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=`+token2+`&buyAmount=3000000000000000000`
+        //     //`https://api.0x.org/swap/v1/quote?buyToken=DAI&sellToken=ETH&buyAmount=1000000000000000000`
+        // );
+        url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=` +
+            token1 + `&buyToken=` +
+            token2 + `&sellAmount=` +
+            amountInWei + `&feeRecipient=` +
+            feeAddress + `&buyTokenPercentageFee=` +
+            `0.015`
+
+        // url = `https://bsc.api.0x.org/swap/v1/quote?sellToken=BNB&buyToken=1INCH&buyAmount=10000000000000000`
+
+        const web3 = new Web3(window.ethereum);
+        let accounts = await web3.eth.getAccounts();
+        web3.eth.defaultAccount = accounts[0]
+        console.log(web3.eth.defaultAccount)
+
+        const response = await fetch(url).then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    response.text().then((text) => {
+                        // document.getElementById('output').innerHTML = "Error: " + text;
+                        document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+
+                        throw new Error(text)
+                    });
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then((responseJson) => {
+                // Do something with the response
+                // console.log(response.json());
+                console.log(responseJson);
+                // const web3 = new Web3(window.ethereum);
+                // let accounts = web3.eth.getAccounts();
+                // web3.eth.defaultAccount = accounts[0]
+                web3.eth.sendTransaction(responseJson, function(error, txhash) {
+                    if (error) {
+                        // error handling
+                        console.log("error")
+                        console.log(token2)
+
+                        document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
+
+                        document.getElementById('tokenAddress').innerHTML = tokens.address;
+                        document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
+                        document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
+
+                        console.log(amount)
+                        console.log('towlr')
+
+                        postTxn(web3.eth.defaultAccount, token1, token2, amount, "false");
+
+                        // console.log(tokens.address, tokens.symbol, tokens.decimals)
+                    } else {
+                        // handling of successful transaction
+                        console.log("success")
+                        document.getElementById('output').innerHTML = "You received: " + token2;
+                        document.getElementById('tokenAddress').innerHTML = tokens.address;
+                        document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
+                        document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
+
+
+
+
+                        //function to insert data in mongodb 
+                        postTxn(web3.eth.defaultAccount, token1, token2, amount, "true");
+                        //closes popup warning
+                        popupWarning();
+
+                        togglePopup(token2);
+                        // addToken();
+
+                    }
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
     // if (!response.ok) {
@@ -422,7 +536,8 @@ async function getTokens() {
         const amount = document.getElementById('amountId').value
 
         swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, 0, "")
-    } else {
+    }
+    if (network == "BSC") {
         const response = await fetch(
             `https://api.1inch.exchange/v3.0/56/tokens`
             // `https://api.0x.org/swap/v1/tokens`
@@ -481,6 +596,52 @@ async function getTokens() {
         const amount = document.getElementById('amountId').value
 
         swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, decimals, tokenName)
+    }
+    if (network == "Ropsten") {
+
+
+
+        const response = await fetch(
+            `https://ropsten.api.0x.org/swap/v1/tokens`
+            // `https://api.0x.org/swap/v1/tokens`
+            // `https://polygon.api.0x.org/swap/v1/tokens`
+            // `https://bsc.api.0x.org/swap/v1/tokens`
+            //`https://api.0x.org/swap/v1/quote?buyToken=DAI&sellToken=ETH&buyAmount=1000000000000000000`
+        );
+        const tokenResponse = await response.json()
+            //return tokens['symbol']
+        console.log(tokenResponse);
+        // console.log(tokenResponse.records[0].symbol)
+
+        const tokens = []
+
+        for (let i = 0; i < tokenResponse.records.length; i++) {
+            // tokens[i] = tokenResponse.records[i].symbol
+            tokens[i] = tokenResponse.records[i]
+        }
+        console.log(tokens);
+        // arr = []
+        // for (var i = 0; i < tokens.length; i++) {
+        //     arr.push(tokens[i].symbol)
+        // }
+        // console.log(arr)
+
+
+
+        var token1 = document.getElementById('tokenSelect').value;
+        var coinIdx2 = Math.floor(Math.random() * tokens.length);
+
+        while (tokens[coinIdx2].symbol == token1) {
+            coinIdx2 = Math.floor(Math.random() * tokens.length);
+        }
+
+        //console.log("Swap token: ", tokens[coinIdx1])
+        console.log("Swap from token: ", token1)
+        console.log("Swap to token: ", tokens[coinIdx2].symbol)
+
+        const amount = document.getElementById('amountId').value
+
+        swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, 0, "")
     }
 
 }
