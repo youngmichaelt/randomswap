@@ -176,8 +176,8 @@
     #backButton {
         font-family: Delicious;
         font-size: 24px;
-        position: absolute;
-        top: 0px;
+        position: fixed;
+        bottom: 0px;
         left: 0px;
         /* left: 50vw; */
         /* margin-top: 10px;
@@ -662,8 +662,8 @@ optgroup {
         margin-top: 10px;
         margin-left: 10px;
         font-size: 24px;
-        position: absolute;
-        top: 0;
+        position: fixed;
+        bottom: 0;
         left: 0;
     }
     #swapButton {

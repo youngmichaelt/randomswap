@@ -109,6 +109,27 @@
 
             </div>
         </div>
+        <div class="popup" id="popupMetaMask">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popupMetaMask()">×</div>
+                <h1 id="popupTitle" style="font-size: 42px;">MetaMask extension must be installed to use Random Swap</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="popupMetaMask()">Okay</button>
+
+            </div>
+        </div>
+        <div class="popup" id="popupConnection">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popupConnection()">×</div>
+                <h1 id="popupTitle" style="font-size: 42px;">You must be connected to MetaMask before swapping.</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="popupConnection()">Okay</button>
+
+            </div>
+        </div>
+
 
 
         <!-- <button onclick="togglePopup()">Show Popup</button> -->
@@ -147,23 +168,36 @@
             if (!isMobile) {
                 /* your code here */
 
+                if (typeof window.ethereum == 'undefined' ||
+                    (typeof window.web3 == 'undefined')) {
+
+                    popupMetaMask();
+
+                    // Web3 browser user detected. You can now use the provider.
+                    //const provider = window['ethereum'] || window.web3.currentProvider
+                    //alert("MetaMask must be installed for ");
 
 
-                const web3 = new Web3(window.ethereum);
-                let accounts = await web3.eth.getAccounts();
-                // console.log(accounts.length)
-                if (accounts != null) {
-                    if (accounts.length == 0) {
-                        console.log("not connected")
-                        document.getElementById('connectButton').innerText = "Connect";
-                    } else {
-                        console.log("connected")
-                        document.getElementById('connectButton').innerText = "Connected";
+                } else {
+                    const web3 = new Web3(window.ethereum);
+                    let accounts = await web3.eth.getAccounts();
+                    // console.log(accounts.length)
+                    if (accounts != null) {
+                        if (accounts.length == 0) {
+                            console.log("not connected")
+                            document.getElementById('connectButton').innerText = "Connect";
+                            // popupConnection();
+                        } else {
+                            console.log("connected")
+                            document.getElementById('connectButton').innerText = "Connected";
+                        }
                     }
+                    web3.eth.defaultAccount = accounts[0];
                 }
 
 
-                web3.eth.defaultAccount = accounts[0];
+
+
             } else {
                 popupMobile();
                 document.getElementById('connectButton').style.visibility = 'hidden';
@@ -171,21 +205,7 @@
             }
 
 
-            // const web3 = new Web3(window.ethereum);
-            // let accounts = await web3.eth.getAccounts();
-            // // console.log(accounts.length)
-            // if (accounts != null) {
-            //     if (accounts.length == 0) {
-            //         console.log("not connected")
-            //         document.getElementById('connectButton').innerText = "Connect";
-            //     } else {
-            //         console.log("connected")
-            //         document.getElementById('connectButton').innerText = "Connected";
-            //     }
-            // }
 
-
-            // web3.eth.defaultAccount = accounts[0];
 
 
             var txns = <%-JSON.stringify(txns)%>;

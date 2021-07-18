@@ -9,8 +9,6 @@
 4. Remove unneeded files
 5. Buy domain
 6. Set up https
-7. Set correct apis
 8. Set analytics
 9. Add node packages to gitignore
 10. Set up env file
-11. CREATE ABOUT PAGE

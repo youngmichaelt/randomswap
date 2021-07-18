@@ -33,64 +33,36 @@ app.use(cors())
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
-    //res.send('Hello World');
-    // res.sendFile('public/index.html');
-    // var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
+
     var query = txn.find({}, null, { limit: 10, sort: { _id: -1 } })
     query.exec(function(err, txns) {
-        // console.log(txns.length);
 
-        // const txnList = []
-
-        // for (i = 0; i < txns.length; i++) {
-        //     temp = []
-        //     temp.push(txns[i].address)
-        //     temp.push(txns[i].token1)
-        //     temp.push(txns[i].token2)
-        //     temp.push(txns[i].amount)
-        //     txnList.push(temp)
-        // }
-        // console.log(docs[0].token1)
-        // res.send(docs);
         res.render('index.ejs', { txns: txns });
     });
 
-    // res.render('index.ejs', { docs: docs });
-    // res.render('public/index.ejs')
 
-
-
-
-    //swap;
-    //console.log(swap)
 
 })
 app.get('/about', function(req, res) {
-    //res.send('Hello World');
-    // res.sendFile('/Users/mac/Desktop/randomswap/public/test.html');
+
     res.render('about.ejs');
-    //swap;
-    //console.log(swap)
+
 
 })
 
-app.get('/refactor', function(req, res) {
-    res.render('refactor.ejs');
-})
 
-app.get('/txn', function(req, res) {
-    let newtxn = new txn({
-        address: "test",
-        token1: "test",
-        token2: "test",
-        amount: "test"
-    })
-    newtxn.save();
 
-    // newtxn.save(function(err) {
-    //     next(err, newtxn);
-    // });
-})
+// app.get('/txn', function(req, res) {
+//     let newtxn = new txn({
+//         address: "test",
+//         token1: "test",
+//         token2: "test",
+//         amount: "test"
+//     })
+//     newtxn.save();
+
+
+// })
 
 app.post('/txn', function(req, res) {
 
@@ -105,19 +77,15 @@ app.post('/txn', function(req, res) {
     })
     newtxn.save();
     res.send({ status: 'SUCCESS' });
-    // newtxn.save();
 
-    // newtxn.save(function(err) {
-    //     next(err, newtxn);
-    // });
 })
 
-app.get('/lasttxn', function(req, res) {
-    var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
-    query.exec(function(err, docs) {
-        console.log(docs);
-    });
-})
+// app.get('/lasttxn', function(req, res) {
+//     var query = txn.find({}, null, { limit: 10, sort: { 'epoch': -1 } });
+//     query.exec(function(err, docs) {
+//         console.log(docs);
+//     });
+// })
 
 
 

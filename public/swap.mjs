@@ -1,19 +1,38 @@
 function togglePopup(token) {
     document.getElementById("popup-1").classList.toggle("active");
     document.getElementById("popupTitle").innerHTML = "You got " + token;
-    // document.getElementById("popupSymbol").innerHTML = "Symbol: " + token;
 }
 
-function popupWarning() {
-    document.getElementById("warningPopup").classList.toggle("active");
-    //document.getElementById("popupTitle").innerHTML = "Make sure you are on correct network in MetaMask before swapping!";
-    // document.getElementById("popupSymbol").innerHTML = "Symbol: " + token;
+async function popupWarning() {
+
+    web3 = new Web3(window.ethereum);
+    let accounts = await web3.eth.getAccounts();
+    // console.log(accounts.length)
+    if (accounts != null) {
+        if (accounts.length == 0) {
+
+            popupConnection();
+        } else {
+            document.getElementById("warningPopup").classList.toggle("active");
+        }
+    }
+
+
 }
 
 function popupMobile() {
     document.getElementById("mobilePopup").classList.toggle("active");
-    //document.getElementById("popupTitle").innerHTML = "Make sure you are on correct network in MetaMask before swapping!";
-    // document.getElementById("popupSymbol").innerHTML = "Symbol: " + token;
+
+}
+
+function popupMetaMask() {
+    document.getElementById("popupMetaMask").classList.toggle("active");
+
+}
+
+function popupConnection() {
+    document.getElementById("popupConnection").classList.toggle("active");
+
 }
 
 
@@ -22,34 +41,24 @@ function popupMobile() {
 
 
 async function mmConnect() {
-    // let provider = await detectEthereumProvider();
     provider = new ethers.providers.Web3Provider(window.ethereum);
     // Prompt user for account connections
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     console.log("Account:", await signer.getAddress());
-    // await window.ethereum.enable()
 
     const web3 = new Web3(window.ethereum);
     var isConnected = ethereum.isConnected();
     console.log(isConnected);
 
-    // console.log(getTokens());
-    // getTokens();
-    //console.log(apiTest(signer));
+
 
 };
 
 
 async function swap(token1, token2, amount, tokens, network, decimals, tokenName) {
 
-    // console.log(getTokens());
-    // var network = document.getElementById('network').value;
-    // console.log(network);
-
     if (network == "ETH") {
-
-
 
         //address = "0xde336686ba638C545a46F58B3Dd46D0b9be23769";
         feeAddress = "0xfC2782122A7870811bd5864Ea9C5c67F1d48e863";
@@ -65,14 +74,12 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
         //     `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=`+token2+`&buyAmount=3000000000000000000`
         //     //`https://api.0x.org/swap/v1/quote?buyToken=DAI&sellToken=ETH&buyAmount=1000000000000000000`
         // );
-        url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=` +
+        url = `https://api.0x.org/swap/v1/quote?sellToken=` +
             token1 + `&buyToken=` +
             token2 + `&sellAmount=` +
             amountInWei + `&feeRecipient=` +
             feeAddress + `&buyTokenPercentageFee=` +
             `0.015`
-
-        // url = `https://bsc.api.0x.org/swap/v1/quote?sellToken=BNB&buyToken=1INCH&buyAmount=10000000000000000`
 
         const web3 = new Web3(window.ethereum);
         let accounts = await web3.eth.getAccounts();
@@ -96,9 +103,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 // Do something with the response
                 // console.log(response.json());
                 console.log(responseJson);
-                // const web3 = new Web3(window.ethereum);
-                // let accounts = web3.eth.getAccounts();
-                // web3.eth.defaultAccount = accounts[0]
+
                 web3.eth.sendTransaction(responseJson, function(error, txhash) {
                     if (error) {
                         // error handling
@@ -124,8 +129,6 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         document.getElementById('tokenAddress').innerHTML = tokens.address;
                         document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
                         document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
-
-
 
 
                         //function to insert data in mongodb 
@@ -215,19 +218,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             amountInWei + "&fee=1.5" + "&fromAddress=" + web3.eth.defaultAccount + "&slippage=1&" +
             "referrerAddress=" + feeAddress
 
-        // `&feeRecipient=` +
-        // `0xfC2782122A7870811bd5864Ea9C5c67F1d48e863` + `&buyTokenPercentageFee=` +
-        // `0.5`
 
-        // url = `https://bsc.api.0x.org/swap/v1/quote?sellToken=BNB&buyToken=1INCH&buyAmount=10000000000000000`
-
-        // url = `https://api.1inch.exchange/v3.0/137/swap?fromTokenAddress=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&'` +
-        //     'toTokenAddress=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&' +
-        //     'amount=10000000000000&fromAddress=0xde336686ba638C545a46F58B3Dd46D0b9be23769' +
-        //     '&slippage=1'
-
-        // url = `https://api.1inch.exchange/v3.0/56/swap?fromTokenAddress=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&toTokenAddress=0xe9e7cea3dedca5984780bafc599bd69add087d56&amount=1&fromAddress=0xde336686ba638C545a46F58B3Dd46D0b9be23769&slippage=1`
-        // console.log(url)
 
         const data = await fetch(url).then((data) => {
             if (data.ok) {
@@ -271,7 +262,6 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
 
                 console.log(amount)
-                console.log('towlr')
 
                 postTxn(web3.eth.defaultAccount, tokenName, token2, ogAmount, "false");
 
@@ -299,64 +289,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
 
 
 
-        // const response = await fetch(url).then((response) => {
-        //         if (response.ok) {
-        //             return response.json();
-        //         } else {
-        //             response.text().then((text) => {
-        //                 document.getElementById('output').innerHTML = "Error: " + text;
-        //                 throw new Error(text)
-        //             });
-        //             throw new Error('Something went wrong');
-        //         }
-        //     })
-        //     .then((responseJson) => {
-        //         // Do something with the response
-        //         // console.log(response.json());
-        //         console.log(responseJson);
-        //         // const web3 = new Web3(window.ethereum);
-        //         // let accounts = web3.eth.getAccounts();
-        //         // web3.eth.defaultAccount = accounts[0]
-        //         web3.eth.sendTransaction(responseJson, function(error, txhash) {
-        //             if (error) {
-        //                 // error handling
-        //                 console.log("error")
-        //                 console.log(token2)
 
-        //                 document.getElementById('output').innerHTML = "Error: " + error.message;
-
-        //                 document.getElementById('tokenAddress').innerHTML = tokens.address;
-        //                 document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
-        //                 document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
-
-        //                 console.log(amount)
-        //                 console.log('towlr')
-
-        //                 postTxn(web3.eth.defaultAccount, token1, token2, amount, "false");
-
-        //                 // console.log(tokens.address, tokens.symbol, tokens.decimals)
-        //             } else {
-        //                 // handling of successful transaction
-        //                 console.log("success")
-        //                 document.getElementById('output').innerHTML = "You received: " + token2;
-        //                 document.getElementById('tokenAddress').innerHTML = tokens.address;
-        //                 document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
-        //                 document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
-
-
-
-        //                 //function to insert data in mongodb 
-        //                 postTxn(web3.eth.defaultAccount, token1, token2, amount, "true");
-
-        //                 togglePopup(token2);
-        //                 // addToken();
-
-        //             }
-        //         })
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //     });
 
     }
     if (network == "Ropsten") {
@@ -372,11 +305,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
         }
         const amountInWei = amount * 1000000000000000000
 
-        // const response = await fetch(
-        //     //`https://ropsten.api.0x.org/swap/v1/quote?${JSON.stringify(params)}`
-        //     `https://ropsten.api.0x.org/swap/v1/quote?sellToken=`+token1+`&buyToken=`+token2+`&buyAmount=3000000000000000000`
-        //     //`https://api.0x.org/swap/v1/quote?buyToken=DAI&sellToken=ETH&buyAmount=1000000000000000000`
-        // );
+
         url = `https://ropsten.api.0x.org/swap/v1/quote?sellToken=` +
             token1 + `&buyToken=` +
             token2 + `&sellAmount=` +
@@ -384,7 +313,6 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             feeAddress + `&buyTokenPercentageFee=` +
             `0.015`
 
-        // url = `https://bsc.api.0x.org/swap/v1/quote?sellToken=BNB&buyToken=1INCH&buyAmount=10000000000000000`
 
         const web3 = new Web3(window.ethereum);
         let accounts = await web3.eth.getAccounts();
@@ -408,9 +336,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 // Do something with the response
                 // console.log(response.json());
                 console.log(responseJson);
-                // const web3 = new Web3(window.ethereum);
-                // let accounts = web3.eth.getAccounts();
-                // web3.eth.defaultAccount = accounts[0]
+
                 web3.eth.sendTransaction(responseJson, function(error, txhash) {
                     if (error) {
                         // error handling
@@ -456,37 +382,12 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             });
     }
 
-    // if (!response.ok) {
-    //     const message = `An error has occured: ${response.text}`;
-    //     console.log(message)
-    //     console.log(response);
-    //     throw new Error(message);
-    //   }
 
-
-
-    // const web3 = new Web3(window.ethereum);
-    // let accounts = await web3.eth.getAccounts();
-    // web3.eth.defaultAccount = accounts[0]
-
-    // const response = await fetch(`https://api.0x.org/swap/v0/quote?buyToken=DAI&sellToken=ETH&buyAmount=10000000000000000000`);
-
-
-
-    // await web3.eth.sendTransaction(await response.json())
-
-    // await web3.eth.sendTransaction(await response.json(), function (error, txhash) {
-    //     if (error) {
-    //         // error handling
-    //         console.log("errr")
-    //     }
-    //     else {
-    //         // handling of successful transaction
-    //         console.log("succes")
-    //     }})
 
 }
 async function getTokens() {
+
+
 
     var network = document.getElementById('network').value;
     // console.log(network);
@@ -558,13 +459,7 @@ async function getTokens() {
         })
 
 
-        // for (var key in tokenResponse.tokens) {
-        //     // if (tokenResponse.tokens.hasOwnProperty(key)) {
-        //     //     // console.log(key + " -> " + tokenResponse.tokens[key].symbol);
-        //     //     tokens[i] = tokenResponse.tokens[key]
-        //     // }
-        //     tokens[i] = tokenResponse.tokens[key]
-        // }
+
         console.log(tokens);
 
         // arr = []
