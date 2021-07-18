@@ -65,10 +65,10 @@ app.get('/', function(req, res) {
     //console.log(swap)
 
 })
-app.get('/test', function(req, res) {
+app.get('/about', function(req, res) {
     //res.send('Hello World');
     // res.sendFile('/Users/mac/Desktop/randomswap/public/test.html');
-    res.render('test.ejs');
+    res.render('about.ejs');
     //swap;
     //console.log(swap)
 

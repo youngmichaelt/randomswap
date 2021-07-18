@@ -173,6 +173,17 @@
         margin-left: 10px; */
         /* padding-left: 50px; */
     }
+    #backButton {
+        font-family: Delicious;
+        font-size: 24px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        /* left: 50vw; */
+        /* margin-top: 10px;
+        margin-left: 10px; */
+        /* padding-left: 50px; */
+    }
     #swapButton {
         width: 200px;
         font-size: 38px;
@@ -199,6 +210,12 @@
         left: 7.5%;
         filter: brightness(75%);
         transform: rotate(350deg);
+    }
+    #gromImageAbout {
+        width: 120px;
+        height: 165px;
+        /* position: absolute; */
+        filter: brightness(75%);
     }
 }
 
@@ -335,12 +352,28 @@
     #aboutButton {
         font-family: Delicious;
         font-size: 24px;
+        /* position: absolute; */
+        /* top: 0;
+        left: 0;
+        margin-bottom: 10px;
+        margin-left: 175px; */
+        /* padding-left: 50px; */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    #backButton {
+        font-family: Delicious;
+        font-size: 24px;
+        /* position: absolute; */
+        /* top: 0;
+        left: 0;
+        margin-bottom: 10px;
+        margin-left: 175px; */
+        /* padding-left: 50px; */
         position: absolute;
         top: 0;
         left: 0;
-        margin-bottom: 10px;
-        margin-left: 175px;
-        /* padding-left: 50px; */
     }
     #tokenSelect {
         font-family: Delicious;
@@ -409,6 +442,17 @@
         left: 8.5%;
         filter: brightness(75%);
         transform: rotate(350deg);
+    }
+    #gromImageAbout {
+        width: 175px;
+        height: 250px;
+        /* position: absolute; */
+        /* padding-right: 300px; */
+        /* display: inline-block; */
+        /* padding-top: 100px;
+        left: 8.5%; */
+        filter: brightness(75%);
+        /* transform: rotate(350deg); */
     }
     /* input,
     select {
@@ -609,6 +653,19 @@ optgroup {
         bottom: 0;
         left: 0;
     }
+    #backButton {
+        font-family: Delicious;
+        font-size: 24px;
+        /* position: absolute;
+        bottom: 0px; */
+        /* left: 50vw; */
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 24px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     #swapButton {
         width: 200px;
         font-size: 38px;
@@ -636,5 +693,16 @@ optgroup {
         left: 7.5%;
         filter: brightness(75%);
         transform: rotate(350deg);
+    }
+    #gromImageAbout {
+        width: 65px;
+        height: 110px;
+        /* position: absolute; */
+        /* padding-right: 300px; */
+        /* display: inline-block; */
+        /* top: 90px;
+        left: 7.5%; */
+        filter: brightness(75%);
+        /* transform: rotate(350deg); */
     }
 }
