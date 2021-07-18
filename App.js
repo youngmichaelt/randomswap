@@ -3,6 +3,9 @@ var app = express();
 var cors = require('cors')
 var stringify = require('qs-stringify');
 var path = require('path');
+const https = require('https');
+var dotenv = require('dotenv');
+dotenv.config();
 
 var qs = require('qs');
 // var mongo = require('mongodb');
@@ -26,8 +29,26 @@ app.use(bodyParser.json())
 
 var txn = mongoose.model('txn');
 
-mongoose.connect('mongodb://localhost:27017/swapdb', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/swapdb', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://' + process.env.MONGO_USERNAME + ':' + process.env.MONGO_PASSWORD + '@localhost:27017/swapdb', { useNewUrlParser: true, useUnifiedTopology: true });
+
 app.use(cors())
+
+// https.createServer({
+//         cert: fs.readFileSync('./markitsimpl_com.crt'),
+//         key: fs.readFileSync('./privkey.txt'),
+//         ca: fs.readFileSync('./markitsimpl_com.ca-bundle')
+//     }, app)
+//     .listen(443);
+// app.use(function(req, res, next) {
+//     if (req.secure) {
+//         // request was via https, so do no special handling
+//         next();
+//     } else {
+//         // request was via http, so redirect to https
+//         res.redirect('https://' + req.headers.host + req.url);
+//     }
+// });
 
 
 app.use(express.static('public'));
@@ -95,11 +116,5 @@ var server = app.listen(8081, function() {
     var host = server.address().address
     var port = server.address().port
 
-    //    console.log("Example app listening at http://%s:%s", host, port)
-    //    const params = {
-    //     buyToken: 'DAI',
-    //     sellToken: 'ETH',
-    //     sellAmount: '1000000000000000000', // Always denominated in wei
-    // }
-    // console.log(`https://api.0x.org/swap/v1/quote?${qs.stringify(params)}`);
+
 })
