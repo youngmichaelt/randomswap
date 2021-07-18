@@ -1,0 +1,185 @@
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+body,
+html,
+blockquote,
+fieldset,
+input {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    font-size: 15px;
+}
+
+label {
+    font: 20px Helvetica;
+}
+
+form {
+    padding-top: 5px;
+}
+
+body {
+    font: 20px Helvetica;
+    padding-bottom: 40px;
+}
+
+#computer {
+    /* width: 100px;
+    height: 1500px; */
+    /* background-image: "public/computer.png"; */
+    /* background-repeat: no-repeat; */
+    /* background-size: contain; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+h1 {
+    font: bold 65px/60px Helvetica, Arial, Sans-serif;
+    text-align: center;
+    color: black;
+    /* text-shadow: 0px 2px 6px #333; */
+}
+
+h1 small {
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 14px;
+    display: block;
+    color: black;
+}
+
+h2 a {
+    display: block;
+    text-decoration: none;
+    margin: 0 0 30px 0;
+    font: italic 45px Georgia, Times, Serif;
+    text-align: center;
+    color: #bfe1f1;
+    /* text-shadow: 0px 2px 6px #333; */
+}
+
+h2 a:hover {
+    color: #90bcd0;
+}
+
+
+/* COMMON CLASSES */
+
+.break {
+    clear: both;
+}
+
+
+/* WRAPPER */
+
+#wrapper {
+    width: 1100px;
+    height: 80px;
+    margin: 40px auto;
+}
+
+
+/* CONTENT */
+
+#content {
+    width: 1100px;
+    height: 800px;
+}
+
+
+/* #content p.info {
+    margin: 20px;
+    color: #eee;
+}
+
+#content p.info a {
+    color: #eee;
+} */
+
+
+/* WINDOWS XP */
+
+#windowsxp {
+    width: 1100px;
+    height: 700px;
+    padding-bottom: 40px;
+    /* width: 1200px;
+    height: 640px; */
+    /* background-image: url("http://demo.marcofolio.net/winxp_error/images/background.jpg"); */
+    /* background-image: url('https://i.stack.imgur.com/SPB7x.jpg'); */
+    background-image: url('https://d7hftxdivxxvm.cloudfront.net?resize_to=width&amp;src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2F1E2blfmrxuSPUH-2oc08gw%252F14273043642_d63ded6c05_o%2B%25281%2529.png&amp;width=1200&amp;quality=80');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-box-shadow: 0px 0px 5px #888;
+    -webkit-box-shadow: 0px 0px 5px #888;
+    /* text-align: center; */
+    position: relative;
+}
+
+.dialog {
+    width: 650px;
+    height: 500px;
+    /* top: 350px; */
+    /* left: 440px; */
+    background-color: #f0ede0;
+    /* display: inline-block; */
+    text-align: center;
+    /* position: absolute; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("http://demo.marcofolio.net/winxp_error/images/dialogheader.jpg");
+    background-repeat: repeat-x;
+    border-bottom: 3px ridge #0034b0;
+    border-left: 2px solid #1783f2;
+    border-right: 2px solid #1783f2;
+    /* -moz-border-radius-topright: 10px;
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-top-left-radius: 10px; */
+}
+
+.dialog h3 {
+    height: 32px;
+    font-size: 18px;
+    color: #eee;
+    text-shadow: 1px 0px 1px #0a2b96;
+    padding: 5px 0 0 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+}
+
+.dialog img {
+    float: left;
+    padding: 20px;
+}
+
+
+/* .dialog p {
+    padding: 10px;
+    font-size: 12px;
+    color: #000 !important;
+} */
+
+button {
+    font-size: 15px;
+    /* width: 75px; */
+    height: 50px;
+    display: inline-block;
+}

@@ -1,0 +1,128 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./stylerefactor.css">
+
+    <title>Random Swap</title>
+</head>
+
+<body>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/3.0.0-rc.5/web3.min.js"></script>
+
+
+
+
+    <!-- <script src="./swap.mjs" type="text/javascript"></script> -->
+
+    <header class="page-header" style="text-align: center;">About
+        <!-- <img src="https://img.icons8.com/ios/452/ethereum.png"></img> -->
+        <!-- <h1>
+            Random Swap
+        </h1> -->
+
+    </header>
+    <!-- <img id="gromImage" src="./grom-removebg.png"></img> -->
+    <div style="text-align: center;">
+        <p>Random Swap allows you to swap cryptocurrency randomly on the Ethereum/Ropsten network and Binance Smart Chain. </p>
+        <p>It is powered by the 0x and 1INCH APIs, which allows us to swap coins without holding a ton of crytpo in liquidity pools.</p>
+        <!-- <p>Use case: I thought it would be fun to just swap to a random coin</p> -->
+        <p>This site is a beta, so make sure you test on the Ropsten network before actually swapping your coins on the MainNet, or just do it right away, idc.</p>
+        <br>
+        <p>Tips:</p>
+        <p>1. When swapping on ETH/Ropsten network, make sure your gas price and amount are high so you don't run out while swapping.</p>
+        <p>2. Please double check you have the correct network selected in MetaMask and on the website. </p>
+        <p>3. MetaMask integration requires users to be on Desktop for this site to work.</p>
+        <br>
+        <!-- <p>Gromit Token launch coming soon...</p>
+        <img id="gromImageAbout" src="./grom-removebg.png"></img>
+        <br> -->
+        <p>Support</p>
+        <p>Is there a fee? Yes, its like 1%, I got college loans I gotta pay for.</p>
+        <p>Tip me:</p>
+        <p style="word-wrap: break-word;">0xfC2782122A7870811bd5864Ea9C5c67F1d48e863</p>
+        <!-- <img id="gromImage" src="./grom-removebg.png"></img> -->
+        <div style="text-align: center;">
+            <!-- <p id="swapP">Swap ??? to ???</p> -->
+            <!-- <p>This is another paragraph.</p> -->
+            <!-- <img id="gromImage" src="./grom-removebg.png"></img> -->
+
+
+            <!-- <button onclick="testPost()">POST</button> -->
+            <!-- <button id="connectButton" onclick="mmConnect()"></button>
+            <button id="swapButton" onclick="popupWarning()">SWAP</button>
+            <button id="addTokenButton" onclick="addToken()">Add to MetaMask</button> -->
+            <!-- <button id="aboutButton" onclick="">About</button> -->
+            <br>
+            <!-- <p id="currAccount"></p> -->
+            <!-- <br> -->
+            <p id="output"></p>
+        </div>
+        <!-- <table id="txnTable">
+            <caption>Recent Swaps</caption>
+
+
+
+
+
+        </table> -->
+        <br>
+        <br>
+        <br>
+        <!-- <button id="aboutButton" onclick="">About</button> -->
+        <button id="backButton" onclick="window.location.href = '/';">Back</button>
+
+        <div class="popup" id="popup-1">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="togglePopup()">×</div>
+                <h1 id="popupTitle">You got ETH!</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="addToken()">Add token to metamask</button>
+
+            </div>
+        </div>
+        <div class="popup" id="warningPopup">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popupWarning()">×</div>
+                <h1 id="popupTitle" style="font-size: 42px;">Make sure you are on correct network in MetaMask before swapping!</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="getTokens()">I've checked!</button>
+
+            </div>
+        </div>
+        <div class="popup" id="mobilePopup">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popupMobile()">×</div>
+                <h1 id="popupTitle" style="font-size: 42px;">Random Swap only works on desktop because of MetaMask integration</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="popupMobile()">Okay</button>
+
+            </div>
+        </div>
+
+
+        <!-- <button onclick="togglePopup()">Show Popup</button> -->
+
+    </div>
+
+    <!-- <p>This is a paragraph.</p> -->
+    <!-- <p>This is another paragraph.</p> -->
+
+    <p hidden id="tokenAddress"></p>
+    <p hidden id="tokenSymbol"></p>
+    <p hidden id="tokenDecimals"></p>
+
+
+
+
+
+
+</body>
+
+</html>

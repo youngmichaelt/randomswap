@@ -1,0 +1,352 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./stylerefactor.css">
+
+    <title>Random Swap</title>
+</head>
+
+<body>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/3.0.0-rc.5/web3.min.js"></script>
+
+
+
+
+    <script src="./swap.mjs" type="text/javascript"></script>
+
+    <header class="page-header" style="text-align: center;">Random Swap
+        <!-- <img src="https://img.icons8.com/ios/452/ethereum.png"></img> -->
+        <!-- <h1>
+            Random Swap
+        </h1> -->
+        <select id="network">
+            <option value="BSC">BSC</option>
+            <option value="ETH">ETH</option>
+            <option value="Ropsten">Ropsten</option>
+            
+        </select>
+    </header>
+    <!-- <img id="gromImage" src="./grom-removebg.png"></img> -->
+    <div style="text-align: center;">
+        <p>Swap ??? to ???</p>
+
+        <!-- <img id="gromImage" src="./grom-removebg.png"></img> -->
+        <div style="text-align: center;">
+            <!-- <p id="swapP">Swap ??? to ???</p> -->
+            <!-- <p>This is another paragraph.</p> -->
+            <!-- <img id="gromImage" src="./grom-removebg.png"></img> -->
+
+            <form style="text-align: center;">
+                <label for="token1">Token to Swap</label>
+                <!-- <input type="text" id="token1" name="token1" value="ETH"> -->
+                <select id="tokenSelect">
+                        <!-- <option value="BSC">BSC</option>
+                        <option value="ETH">ETH</option> -->
+                        
+                </select>
+                <!-- <br><br> -->
+                <label for="amoundId">Amount to Swap</label>
+                <input type="text" id="amountId" name="amoundId" value="0.01">
+                <!-- <br><br> -->
+                <!-- <label for="lname">Last name:</label>
+                    <input type="text" id="lname" name="lname"><br><br> -->
+                <!-- <input type="submit" value="Submit"> -->
+            </form>
+            <!-- <button onclick="testPost()">POST</button> -->
+            <button id="connectButton" onclick="mmConnect()"></button>
+            <button id="swapButton" onclick="popupWarning()">SWAP</button>
+            <button id="addTokenButton" onclick="addToken()">Add to MetaMask</button>
+            <!-- <button id="aboutButton" onclick="">About</button> -->
+            <br>
+            <!-- <p id="currAccount"></p> -->
+            <!-- <br> -->
+            <p id="output"></p>
+        </div>
+        <table id="txnTable">
+            <caption>Recent Swaps</caption>
+
+
+
+
+
+        </table>
+        <br>
+        <br>
+        <br>
+        <button id="aboutButton" onclick="window.location.href = '/about';">About</button>
+
+        <div class="popup" id="popup-1">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="togglePopup()">×</div>
+                <h1 id="popupTitle">You got ETH!</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="addToken()">Add token to metamask</button>
+
+            </div>
+        </div>
+        <div class="popup" id="warningPopup">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popupWarning()">×</div>
+                <h1 id="popupTitle" style="font-size: 42px;">Make sure you are on correct network in MetaMask before swapping!</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="getTokens()">I've checked!</button>
+
+            </div>
+        </div>
+        <div class="popup" id="mobilePopup">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popupMobile()">×</div>
+                <h1 id="popupTitle" style="font-size: 42px;">Random Swap only works on desktop because of MetaMask integration</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="popupMobile()">Okay</button>
+
+            </div>
+        </div>
+        <div class="popup" id="popupMetaMask">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popupMetaMask()">×</div>
+                <h1 id="popupTitle" style="font-size: 42px;">MetaMask extension must be installed to use Random Swap</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="popupMetaMask()">Okay</button>
+
+            </div>
+        </div>
+        <div class="popup" id="popupConnection">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popupConnection()">×</div>
+                <h1 id="popupTitle" style="font-size: 42px;">You must be connected to MetaMask before swapping.</h1>
+                <!-- <p id="popupSymbol">test</p> -->
+                <button onclick="popupConnection()">Okay</button>
+
+            </div>
+        </div>
+
+
+
+        <!-- <button onclick="togglePopup()">Show Popup</button> -->
+
+    </div>
+
+    <!-- <p>This is a paragraph.</p> -->
+    <!-- <p>This is another paragraph.</p> -->
+
+    <p hidden id="tokenAddress"></p>
+    <p hidden id="tokenSymbol"></p>
+    <p hidden id="tokenDecimals"></p>
+    <p hidden id="txns">
+        <%- JSON.stringify(txns) %>
+    </p>
+
+    <script type='text/javascript'>
+        ropTokens = ["ETH", "WETH", "DAI", "USDC", "TTA", "TTB"]
+            // bscTokens = ["ETH", "WETH", "DAI", "USDC", "TTA", "TTB"]
+        ethTokens = ["ETH", "WETH", "ZRX", "DAI", "USDC", "USDT", "WBTC", "UNI", "MKR", "SNX", "LINK", "SUSD", "TUSD", "SUSHI", "AAVE", "YFI", "BAT", "KNC", "BNT", "BAL",
+            "COMP", "GNO", "REN", "GNT", "OMG", "ANT", "SAI", "CVL", "DTH", "FOAM", "AST", "AION", "GEN", "STORJ", "MANA", "ENTRP", "MLN", "LOOM", "CELR", "RLC", "ICN", "DGD",
+            "ZIL", "cBAT", "cDAI", "cSAI", "cETH", "cREP", "cUSDC", "cZRX", "0xBTC", "SNT", "SPANK", "BOOTY", "UBT", "NMR", "GUSD", "FUN", "PAX", "LPT", "ENJ",
+            "POWR", "REQ", "DNT", "MATIC", "LRC", "RDN", "GST2", "UMA", "BZRX", "renBTC", "LEND", "AMPL", "KEEP", "mUSD", "bUSD", "CRV", "swUSD", "SWRV", "sBTC", "yUSD", "ybCRV",
+            "yUSDC", "yDAI", "yUSDT", "yTUSD", "AKRO", "AUDIO", "BAND", "BASED", "BUSD", "CREAM", "DONUT", "MTA", "mUSD", "PAXG", "PICKLE", "RENZEC", "REP", "SETH",
+            "STAKE", "TBTC", "1INCH"
+        ]
+
+
+        bscTokens = ["BNB", "WBNB", "CHI", "USDT", "CAKE", "BUSD", "ETH", "BTCB", "AUTO", "BSCX", "BDO", "DOT", "UST", "VAI", "UNI", "LINK", "USDC", "zSEED", "DAI", "BAND", "WOOP", "sBDO", "ADA", "SFP", "Fuel", "XVS", "TWT", "EGG", "YFI", "BRY", "SXP", "XRP", "COMP", "ACS", "EARS", "REEF", "ALPHA", "INJ", "KEBAB", "wSOTE", "EOS", "BUNNY", "LTC", "LIT", "BCH", "Helmet", "BREW", "FRONT", "BTCST", "FIL", "DITTO", "ATOM", "1INCH", "vSXP", "vUSDC", "vUSDT", "vBUSD", "vBNB", "vXVS", "vBTC", "vETH", "vLTC", "vXRP", "vBCH", "vDOT", "vLINK", "vBETH", "vDAI", "vFIL", "BETH", "BAKE", "renBTC", "renBCH", "renZEC", "renFIL", "renLUNA", "renDOGE", "renDGB", "BANANA", "MKR", "ZEC", "NEAR", "ETC", "ONT", "BAT", "PAX", "DODO", "BCHA", "IOTX", "MIR", "ANKR", "LINA", "MATH", "ELF", "PAXG", "PROM", "YFII", "LTO", "CREAM", "SPARTA", "ANY", "JulD", "BURGER", "CTK", "STAX", "TCT", "FREE", "CAN", "FRIES", "CBIX", "BHC", "STM", "SPORE", "KP3RB", "7UP", "PHO", "BTD", "CHS", "CRP", "PROPEL", "BIDR", "crADA", "DF", "DOS", "INNBC", "JNTR", "MILK", "NUTS", "JULb", "BIFI", "crDAI", "crYFI", "crLINK", "crUNI", "crATOM", "crCREAM", "crFIL", "crETH", "crXRP", "crBUSD", "crBCH", "crTWT", "crEOS", "crXTZ", "crLTC", "crUSDT", "crBNB", "crBAND", "crDOT", "crBTCB", "crUSDC", "crALPHA", "DOGE", "CROW", "bMXX", "ETHb", "ALPACA", "bKANGAL", "UBU", "BELT", "NIU", "DEGO", "SOUPS", "SOUP", "BEAR", "FLO", "MDO", "MDS", "WOW", "SALT", "BSCPAD", "BFI", "UTL", "FUSII", "CPX", "MEOWTH", "PASTA", "bSRK", "COS", "XCUR", "ALPA", "JGN", "NMX", "DANGO", "BORSHCH", "BTS", "NANA", "MLA", "HARD", "MSC", "ALLOY", "SHIELD", "bALBT", "BR34P", "SOAK", "TRDG", "TACO", "Ramen", "WATCH", "SWGb", "YVS", "START", "BOR", "BDAY", "GMT", "GST", "OPERAND", "VIDT", "SMOKE", "ZEFI", "VIKING", "MATTER", "SHAKE", "MILK2", "DUSK", "PEAK", "BSC", "pOPIUM", "PNL", "CCAKE", "MCRN", "KIND", "TINFOIL", "ERC20", "SPG", "ZD", "TOOLS", "blink", "yPANDA", "FAT", "JIGG", "SAFESTAR", "DEXE", "TREAT", "BUX", "XWIN", "DIESEL", "MTF", "TFF", "DFX", "BBOO", "PIN", "SWAMP", "FEB", "NVT", "YETU", "Berry", "TAO", "OCT", "SAFEMOON", "GFCE", "WHIRL", "MSS", "ARGON", "BGO", "TPT", "pCWS", "SLME", "TRADE", "SAIL", "POLAR", "BLZD", "sALPACA", "BRICK", "BNSD", "vBSWAP", "UBXT", "EPS", "MNDAO", "PoFi", "bDIGG", "IRON", "SUPER", "CYC", "CHIP", "VANCAT", "SACT", "NAUT", "TYPH", "HOGL", "TIT", "SWTH", "bBADGER", "bwJUP", "SPACE", "PALM", "EGLD", "TNDR", "STEEL", "TXL", "QUAM", "XBN", "DOG", "UNICORN", "BLUE", "TORJ", "HPS", "HYDRO", "AceD", "vADA", "CRPTP", "ACSI", "TLM", "UNFI", "BONDLY", "ELE", "MNTN", "CLIMB", "MBOX", "SWIRL", "MGB", "XSPACE", "COOK", "MDG", "ITAM", "Warden", "CTF", "TKO", "SFUND", "NFTL", "FUSE", "FOX", "ZERO", "anyETH", "anyBTC", "fUSDT", "FREN", "RAZE", "JUV", "RSD", "XED", "SOUL", "RUPEE", "BALL", "SAFEGALAXY", "MASH", "MRAT", "SAFEMARS", "BGOV", "SAFEP", "xMARK", "FSAFE", "SAFEBTC", "AQUAGOAT", "PIG", "LIME", "NEON", "ECP", "MOONTOKEN", "ElonGate", "MOCHI", "PDO", "DFY", "bCFX", "FOR", "ZIL", "DDIM", "MDA", "OCTA", "SYL", "PIKA", "LPTP", "bBAG", "NRV", "CRX", "POLS", "BELUGA", "PET", "BRRL", "ICE", "XEND", "BSCS", "WENMOON", "MOD", "FMT", "MOONMOON", "BOG", "GEN", "KEY", "FINE", "MARSH", "WEX", "HAKKA", "FARM", "GREEN", "RAMP", "VGD", "SPOOL", "SEA", "CUB", "BNBTC", "SAFESPACE", "MOONSTAR", "LUNAR", "NFTART", "TUSD", "bLEO", "UNIF", "SMDX", "BINGUS", "bROOBEE", "TREE", "8PAY", "RUGBUST", "CUMMIES", "LOT", "GTON", "POODL", "KODA", "LAUNCH", "lowb", "TBC", "KaiInu", "ZETH", "ZBTC", "ICA", "DND", "FAST", "DOGGY", "UNCX", "PERL", "OM", "XTZ", "PORN", "OSM", "MTDR", "LAS", "PEKC", "X2P", "PVM", "WOO", "USDN", "PACOCA", "LASM", "CHIPS", "PAPR", "PRNTR", "BEV", "LONG", "MOONRISE", "OLYMPUS"]
+        window.addEventListener("load", async function() {
+
+            // ethTokens = ['ETH', 'DAI', 'WETH']
+            // bscTokens = ['BNB', '1INCH', 'NUTS']
+
+            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (!isMobile) {
+                /* your code here */
+
+                if (typeof window.ethereum == 'undefined' ||
+                    (typeof window.web3 == 'undefined')) {
+
+                    popupMetaMask();
+
+                    // Web3 browser user detected. You can now use the provider.
+                    //const provider = window['ethereum'] || window.web3.currentProvider
+                    //alert("MetaMask must be installed for ");
+
+
+                } else {
+                    const web3 = new Web3(window.ethereum);
+                    let accounts = await web3.eth.getAccounts();
+                    // console.log(accounts.length)
+                    if (accounts != null) {
+                        if (accounts.length == 0) {
+                            console.log("not connected")
+                            document.getElementById('connectButton').innerText = "Connect";
+                            // popupConnection();
+                        } else {
+                            console.log("connected")
+                            document.getElementById('connectButton').innerText = "Connected";
+                        }
+                    }
+                    web3.eth.defaultAccount = accounts[0];
+                }
+
+
+
+
+            } else {
+                popupMobile();
+                document.getElementById('connectButton').style.visibility = 'hidden';
+                document.getElementById('swapButton').setAttribute("onclick", "javascript: popupMobile();");
+            }
+
+
+
+
+
+            var txns = <%-JSON.stringify(txns)%>;
+            console.log(txns);
+
+
+
+
+
+            let table = document.getElementById('txnTable');
+            for (i = 0; i < txns.length; i++) {
+                var row = table.insertRow(i);
+                row.insertCell(0).innerHTML = txns[i].address;
+                row.insertCell(1).innerHTML = txns[i].token1;
+                row.insertCell(2).innerHTML = txns[i].token2;
+                row.insertCell(3).innerHTML = txns[i].amount;
+
+            }
+
+            let network = document.getElementById('network').value
+
+
+            if (network == "ETH") {
+
+                select = document.getElementById('tokenSelect');
+
+                for (var i = 0; i < ethTokens.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = ethTokens[i];
+                    opt.innerHTML = ethTokens[i];
+                    select.appendChild(opt);
+                }
+
+            }
+            if (network == "BSC") {
+                select = document.getElementById('tokenSelect');
+
+                for (var i = 0; i < bscTokens.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = bscTokens[i];
+                    opt.innerHTML = bscTokens[i];
+                    select.appendChild(opt);
+                }
+            }
+            if (network == "Ropsten") {
+
+                select = document.getElementById('tokenSelect');
+
+                for (var i = 0; i < ropTokens.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = ropTokens[i];
+                    opt.innerHTML = ropTokens[i];
+                    select.appendChild(opt);
+                }
+
+            }
+
+
+        })
+
+        let network = document.getElementById('network')
+
+        document.getElementById('network').onchange = function() {
+            // ethTokens = ['ETH', 'DAI', 'WETH']
+            // bscTokens = ['BNB', '1INCH', 'NUTS']
+            // ethTokens = ["ETH", "WETH", "DAI", "USDC", "TTA", "TTB"]
+
+            select = document.getElementById('tokenSelect')
+            selectCount = select.length
+                // console.log(select.length)
+            for (i = 0; i < selectCount - 1; i++) {
+                select.remove(select.length - 1);
+                // console.log(i)
+            }
+            console.log(network.value)
+
+            if (document.getElementById('network').value == "ETH") {
+                select = document.getElementById('tokenSelect');
+                console.log(select)
+
+                console.log(ethTokens.length)
+
+
+                for (var i = 0; i < ethTokens.length; i++) {
+                    if (i == 0) {
+                        var opt = select.options[0]
+                        opt.value = ethTokens[i];
+                        opt.innerHTML = ethTokens[i];
+                    } else {
+                        var opt = document.createElement('option');
+                        opt.value = ethTokens[i];
+                        opt.innerHTML = ethTokens[i];
+                        select.appendChild(opt);
+                    }
+
+                }
+
+            }
+            if (document.getElementById('network').value == "BSC") {
+                select = document.getElementById('tokenSelect');
+
+                for (var i = 0; i < bscTokens.length; i++) {
+                    if (i == 0) {
+                        var opt = select.options[0]
+                        opt.value = bscTokens[i];
+                        opt.innerHTML = bscTokens[i];
+                    } else {
+                        var opt = document.createElement('option');
+                        opt.value = bscTokens[i];
+                        opt.innerHTML = bscTokens[i];
+                        select.appendChild(opt);
+                    }
+                }
+            }
+            if (document.getElementById('network').value == "Ropsten") {
+                select = document.getElementById('tokenSelect');
+                console.log(select)
+
+                console.log(ropTokens.length)
+
+
+                for (var i = 0; i < ropTokens.length; i++) {
+                    if (i == 0) {
+                        var opt = select.options[0]
+                        opt.value = ropTokens[i];
+                        opt.innerHTML = ropTokens[i];
+                    } else {
+                        var opt = document.createElement('option');
+                        opt.value = ropTokens[i];
+                        opt.innerHTML = ropTokens[i];
+                        select.appendChild(opt);
+                    }
+
+                }
+
+            }
+        }
+    </script>
+
+
+
+</body>
+
+</html>

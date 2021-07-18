@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./stylerefactor.css">
+
+    <title>Random Swap</title>
+</head>
+
+<body>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/3.0.0-rc.5/web3.min.js"></script>
+
+    <button onclick="connect()">connect </button>
+
+
+    <!-- <script src="./swap.mjs" type="text/javascript"></script> -->
+
+
+
+    <script type='text/javascript'>
+        async function connect() {
+            const web3 = new Web3(window.ethereum);
+            provider = new ethers.providers.Web3Provider(window.ethereum);
+            let accounts = await web3.eth.getAccounts();
+            web3.eth.defaultAccount = accounts[0];
+            provider = new ethers.providers.Web3Provider(window.ethereum);
+            // Prompt user for account connections
+            await provider.send("eth_requestAccounts", []);
+            const signer = provider.getSigner();
+            console.log("Account:", await signer.getAddress());
+            // await window.ethereum.enable()
+
+            // web3 = new Web3(window.ethereum);
+            var isConnected = ethereum.isConnected();
+            console.log(isConnected);
+        }
+
+        // window.addEventListener("load", async function() {
+
+        //     provider = new ethers.providers.Web3Provider(window.ethereum);
+        //     // Prompt user for account connections
+        //     await provider.send("eth_requestAccounts", []);
+        //     const signer = provider.getSigner();
+        //     console.log("Account:", await signer.getAddress());
+        //     // await window.ethereum.enable()
+
+        //     const web3 = new Web3(window.ethereum);
+        //     var isConnected = ethereum.isConnected();
+        //     console.log(isConnected);
+        //     // const web3 = new Web3(window.ethereum);
+        //     // let accounts = await web3.eth.getAccounts();
+        //     // web3.eth.defaultAccount = accounts[0];
+        //     // console.log(web3);
+
+
+
+        //     // document.getElementById('currAccount').innerHTML = accounts[0];
+
+        //     // const txns = document.getElementById('txns').innerHTML;
+        //     // console.log(txns);
+        //     // console.log(txns.length);
+
+        //     // var txns = <%-JSON.stringify(txns)%>;
+        //     // console.log(txns);
+
+
+
+
+
+        //     // let table = document.getElementById('txnTable');
+        //     // for (i = 0; i < txns.length; i++) {
+        //     //     var row = table.insertRow(i);
+        //     //     row.insertCell(0).innerHTML = txns[i].address;
+        //     //     row.insertCell(1).innerHTML = txns[i].token1;
+        //     //     row.insertCell(2).innerHTML = txns[i].token2;
+        //     //     row.insertCell(3).innerHTML = txns[i].amount;
+
+        //     // }
+
+        // })
+    </script>
+
+
+
+</body>
+
+</html>

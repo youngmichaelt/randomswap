@@ -1,0 +1,708 @@
+@media (max-width:960px) {
+    * {
+        font-weight: bold;
+    }
+    .popup .overlay {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: none;
+    }
+    .popup .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #fff;
+        width: 95%;
+        max-width: 600px;
+        height: 350px;
+        z-index: 2;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+        /* font-family: "Open Sans", sans-serif; */
+    }
+    .popup .close-btn {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background: #222;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+    }
+    .popup.active .overlay {
+        display: block;
+    }
+    .popup.active .content {
+        transition: all 300ms ease-in-out;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    @font-face {
+        font-family: Delicious;
+        /* src: url('./LemonadeStand-J0Ln.ttf'); */
+        src: url('./Trashfort-vmAX7.ttf');
+    }
+    table,
+    td {
+        table-layout: fixed;
+        font-family: Delicious;
+        font-size: 28px;
+        border: 2px solid black;
+        /* width: 40%; */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        /* text-align: center; */
+        /* display: inline-block; */
+    }
+    th {
+        font-family: Delicious;
+        font-size: 30px;
+        border: 2px solid black;
+        font-weight: bold;
+    }
+    caption {
+        font-family: Delicious;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    #txnTable {
+        font-family: Delicious;
+        font-size: 28px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+        text-align: center;
+    }
+    /* body {
+        font-family: Delicious;
+        font-size: 28px;
+    } */
+    body {
+        background-image: url("https://static.vecteezy.com/system/resources/previews/002/078/291/large_2x/crumpled-paper-background-free-photo.jpg");
+        background-size: cover;
+        font-weight: bolder;
+        /* text-align: center; */
+    }
+    h1 {
+        font-family: Delicious;
+        font-size: 72px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+    header {
+        font-family: Delicious;
+        font-size: 72px;
+        font-weight: bold;
+        /* margin-top: 15px; */
+    }
+    p {
+        font-family: Delicious;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    #swapP {
+        font-size: 48px;
+    }
+    label {
+        display: block;
+        font-family: Delicious;
+        font-size: 40px;
+        font-weight: bold;
+        /* float: left; */
+        /* clear: left; */
+        /* text-align: center; */
+    }
+    #amountId {
+        /* display: inline-block; */
+        font-family: Delicious;
+        font-size: 40px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 50%;
+        box-sizing: border-box;
+        /* text-align: center; */
+        /* margin-left: 10px; */
+        /* float: left; */
+    }
+    #tokenSelect {
+        font-family: Delicious;
+        font-size: 40px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 50%;
+        box-sizing: border-box;
+        /* width: 500px; */
+    }
+    button {
+        font-family: Delicious;
+        font-size: 32px;
+        padding: 8px;
+        margin: 10px;
+        /* text-align: center; */
+    }
+    #connectButton {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 24px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    #aboutButton {
+        font-family: Delicious;
+        font-size: 24px;
+        /* position: absolute;
+        bottom: 0px; */
+        left: 50vw;
+        /* margin-top: 10px;
+        margin-left: 10px; */
+        /* padding-left: 50px; */
+    }
+    #backButton {
+        font-family: Delicious;
+        font-size: 24px;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        /* left: 50vw; */
+        /* margin-top: 10px;
+        margin-left: 10px; */
+        /* padding-left: 50px; */
+    }
+    #swapButton {
+        width: 200px;
+        font-size: 38px;
+        font-weight: bold;
+    }
+    #addTokenButton {
+        display: none;
+    }
+    #network {
+        font-family: Delicious;
+        font-size: 32px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+    #gromImage {
+        width: 80px;
+        height: 125px;
+        position: absolute;
+        /* padding-right: 300px; */
+        /* display: inline-block; */
+        left: 7.5%;
+        filter: brightness(75%);
+        transform: rotate(350deg);
+    }
+    #gromImageAbout {
+        width: 120px;
+        height: 165px;
+        /* position: absolute; */
+        filter: brightness(75%);
+    }
+}
+
+@media (min-width:960px) {
+    * {
+        font-weight: bold;
+    }
+    @font-face {
+        font-family: Delicious;
+        /* src: url('./LemonadeStand-J0Ln.ttf'); */
+        src: url('./Trashfort-vmAX7.ttf');
+    }
+    table,
+    td {
+        table-layout: fixed;
+        font-family: Delicious;
+        font-size: 28px;
+        border: 2px solid black;
+        /* width: 40%; */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        /* text-align: center; */
+        /* display: inline-block; */
+    }
+    th {
+        font-family: Delicious;
+        font-size: 30px;
+        border: 2px solid black;
+        font-weight: bold;
+    }
+    caption {
+        font-family: Delicious;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    #txnTable {
+        font-family: Delicious;
+        font-size: 28px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 55%;
+        text-align: center;
+    }
+    /* body {
+    font-family: Delicious;
+    font-size: 28px;
+} */
+    body {
+        background-image: url("https://static.vecteezy.com/system/resources/previews/002/078/291/large_2x/crumpled-paper-background-free-photo.jpg");
+        background-size: cover;
+        font-weight: bolder;
+        /* text-align: center; */
+    }
+    h1 {
+        font-family: Delicious;
+        font-size: 72px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+    header {
+        font-family: Delicious;
+        font-size: 72px;
+        font-weight: bold;
+        /* margin-top: 15px; */
+    }
+    p {
+        font-family: Delicious;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    #swapP {
+        font-size: 48px;
+    }
+    label {
+        display: block;
+        font-family: Delicious;
+        font-size: 40px;
+        font-weight: bold;
+        /* float: left; */
+        /* clear: left; */
+        /* text-align: center; */
+    }
+    #amountId {
+        /* display: inline-block; */
+        font-family: Delicious;
+        font-size: 40px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 40%;
+        box-sizing: border-box;
+        /* text-align: center; */
+        /* margin-left: 10px; */
+        /* float: left; */
+    }
+    /* select,
+    input[type="text"] {
+        width: 50%;
+        box-sizing: border-box;
+    } */
+    button {
+        font-family: Delicious;
+        font-size: 32px;
+        padding: 8px;
+        margin: 10px;
+        /* text-align: center; */
+    }
+    #connectButton {
+        margin-bottom: 10px;
+        margin-left: 10px;
+        font-size: 24px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    #swapButton {
+        width: 200px;
+        font-size: 38px;
+        font-weight: bold;
+    }
+    #addTokenButton {
+        display: none;
+    }
+    #network {
+        font-family: Delicious;
+        font-size: 32px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+    #aboutButton {
+        font-family: Delicious;
+        font-size: 24px;
+        /* position: absolute; */
+        /* top: 0;
+        left: 0;
+        margin-bottom: 10px;
+        margin-left: 175px; */
+        /* padding-left: 50px; */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    #backButton {
+        font-family: Delicious;
+        font-size: 24px;
+        /* position: absolute; */
+        /* top: 0;
+        left: 0;
+        margin-bottom: 10px;
+        margin-left: 175px; */
+        /* padding-left: 50px; */
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    #tokenSelect {
+        font-family: Delicious;
+        font-size: 40px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 40%;
+        box-sizing: border-box;
+        /* width: 500px; */
+    }
+    .popup .overlay {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: none;
+    }
+    .popup .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #fff;
+        width: 95%;
+        max-width: 600px;
+        height: 350px;
+        z-index: 2;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+        /* font-family: "Open Sans", sans-serif; */
+    }
+    .popup .close-btn {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background: #222;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+    }
+    .popup.active .overlay {
+        display: block;
+    }
+    .popup.active .content {
+        transition: all 300ms ease-in-out;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    #gromImage {
+        width: 175px;
+        height: 250px;
+        position: absolute;
+        /* padding-right: 300px; */
+        /* display: inline-block; */
+        padding-top: 100px;
+        left: 8.5%;
+        filter: brightness(75%);
+        transform: rotate(350deg);
+    }
+    #gromImageAbout {
+        width: 175px;
+        height: 250px;
+        /* position: absolute; */
+        /* padding-right: 300px; */
+        /* display: inline-block; */
+        /* padding-top: 100px;
+        left: 8.5%; */
+        filter: brightness(75%);
+        /* transform: rotate(350deg); */
+    }
+    /* input,
+    select {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    } */
+    /* img {
+        height: 20%;
+        width: 20%;
+    } */
+}
+
+optgroup {
+    font-size: 10px;
+}
+
+@media only screen and (hover: none) and (pointer: coarse) {
+    /* Regular CSS rules here*/
+    * {
+        font-weight: bold;
+    }
+    .popup .overlay {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: none;
+    }
+    .popup .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #fff;
+        width: 95%;
+        max-width: 600px;
+        height: 450px;
+        z-index: 2;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+        /* font-family: "Open Sans", sans-serif; */
+    }
+    .popup .close-btn {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background: #222;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+    }
+    .popup.active .overlay {
+        display: block;
+    }
+    .popup.active .content {
+        transition: all 300ms ease-in-out;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    @font-face {
+        font-family: Delicious;
+        /* src: url('./LemonadeStand-J0Ln.ttf'); */
+        font-weight: bolder;
+        src: url('./Trashfort-vmAX7.ttf');
+    }
+    table,
+    td {
+        table-layout: fixed;
+        font-family: Delicious;
+        font-size: 28px;
+        border: 2px solid black;
+        /* width: 40%; */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: bold;
+        /* text-align: center; */
+        /* display: inline-block; */
+    }
+    th {
+        font-family: Delicious;
+        font-size: 30px;
+        border: 2px solid black;
+        font-weight: bold;
+    }
+    caption {
+        font-family: Delicious;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    #txnTable {
+        font-family: Delicious;
+        font-size: 28px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%;
+        text-align: center;
+    }
+    /* body {
+        font-family: Delicious;
+        font-size: 28px;
+    } */
+    body {
+        background-image: url("https://static.vecteezy.com/system/resources/previews/002/078/291/large_2x/crumpled-paper-background-free-photo.jpg");
+        background-size: cover;
+        font-weight: bolder;
+        /* text-align: center; */
+    }
+    h1 {
+        font-family: Delicious;
+        font-size: 72px;
+        margin-top: 15px;
+    }
+    header {
+        font-family: Delicious;
+        font-size: 72px;
+        font-weight: bold;
+        /* margin-top: 15px; */
+    }
+    p {
+        font-family: Delicious;
+        font-size: 40px;
+        font-weight: bold;
+        /* font-weight: 1000; */
+        filter: brightness(50%);
+    }
+    #swapP {
+        font-size: 48px;
+        /* font-weight: 1000; */
+    }
+    label {
+        display: block;
+        font-family: Delicious;
+        font-size: 40px;
+        font-weight: bold;
+        /* float: left; */
+        /* clear: left; */
+        /* text-align: center; */
+    }
+    #amountId {
+        /* display: inline-block; */
+        font-family: Delicious;
+        font-size: 40px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 50%;
+        box-sizing: border-box;
+        /* text-align: center; */
+        /* margin-left: 10px; */
+        /* float: left; */
+    }
+    #tokenSelect {
+        font-family: Delicious;
+        font-size: 40px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 50%;
+        box-sizing: border-box;
+        /* width: 500px; */
+    }
+    button {
+        font-family: Delicious;
+        font-size: 32px;
+        padding: 8px;
+        margin: 10px;
+        /* text-align: center; */
+    }
+    #connectButton {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 24px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    #aboutButton {
+        font-family: Delicious;
+        font-size: 24px;
+        /* position: absolute;
+        bottom: 0px; */
+        /* left: 50vw; */
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 24px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    #backButton {
+        font-family: Delicious;
+        font-size: 24px;
+        /* position: absolute;
+        bottom: 0px; */
+        /* left: 50vw; */
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 24px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    #swapButton {
+        width: 200px;
+        font-size: 38px;
+        font-weight: bold;
+    }
+    #addTokenButton {
+        display: none;
+    }
+    #network {
+        font-family: Delicious;
+        font-size: 32px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+    #gromImage {
+        width: 65px;
+        height: 110px;
+        position: absolute;
+        /* padding-right: 300px; */
+        /* display: inline-block; */
+        top: 90px;
+        left: 7.5%;
+        filter: brightness(75%);
+        transform: rotate(350deg);
+    }
+    #gromImageAbout {
+        width: 65px;
+        height: 110px;
+        /* position: absolute; */
+        /* padding-right: 300px; */
+        /* display: inline-block; */
+        /* top: 90px;
+        left: 7.5%; */
+        filter: brightness(75%);
+        /* transform: rotate(350deg); */
+    }
+}

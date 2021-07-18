@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+    <title>Random Swap</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <!-- <script type="text/javascript" src="js/script.js"></script> -->
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>Random Swap<small>Swap ETH to ???</small></h1>
+        <!-- <h2><a href="http://www.marcofolio.net/" title="Visit Marcofolio.net">Marcofolio.net</a></h2> -->
+        <div id="content">
+            <p></p>
+            <div id="windowsxp">
+                <div id="errordialog" class="dialog" style="text-align: center;">
+                    <h3>Swap</h3>
+                    <!-- <img src="http://demo.marcofolio.net/winxp_error/images/error.png" alt="Error image"> -->
+
+                    <!-- <div style="text-align: center;"> -->
+                    <p>Swap ETH to ???</p>
+                    <!-- <p>This is another paragraph.</p> -->
+                    <form>
+                        <label for="token1">Token to Swap</label>
+                        <input type="text" id="token1" name="token1" value="ETH"><br><br>
+                        <label for="amoundId">Amount to Swap</label>
+                        <input type="text" id="amountId" name="amoundId" value="0.01"><br><br>
+                        <!-- <label for="lname">Last name:</label>
+                                <input type="text" id="lname" name="lname"><br><br> -->
+                        <!-- <input type="submit" value="Submit"> -->
+                    </form>
+                    <button onclick="mmConnect()">Connect to MetaMask</button>
+                    <button onclick="getTokens()">SWAP</button>
+                    <button onclick="addToken()">Add to MetaMask</button>
+                    <br>
+                    <p id="currAccount"></p>
+                    <br>
+                    <p id="output"></p>
+                    <!-- </div> -->
+
+
+                    <!-- <p><a href="http://www.marcofolio.net/" title="Marcofolio.net" target="_blank" class="button">Get me out!</a></p> -->
+                </div>
+
+            </div>
+        </div>
+        <!-- <p></p> -->
+    </div>
+
+
+</body>
+
+</html>
