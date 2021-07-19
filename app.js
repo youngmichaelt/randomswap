@@ -35,30 +35,30 @@ mongoose.connect('mongodb://' + process.env.MONGO_USERNAME + ':' + process.env.M
 app.use(cors())
 
 https.createServer({
-         cert: fs.readFileSync('./randomswap_xyz.crt'),
-         key: fs.readFileSync('./priv-key.txt'),
-         ca: fs.readFileSync('./randomswap_xyz.ca-bundle')
-     }, app)
-     .listen(443);
+        cert: fs.readFileSync('./randomswap_xyz.crt'),
+        key: fs.readFileSync('./priv-key.txt'),
+        ca: fs.readFileSync('./randomswap_xyz.ca-bundle')
+    }, app)
+    .listen(443);
 
 app.use(function(req, res, next) {
-     
-     if (req.secure) {
-         // request was via https, so do no special handling
-         
-	 next();
-     } else {
-         // request was via http, so redirect to https
-	 console.log("redirect");
-         res.redirect('https://' + req.headers.host + req.url);
-     }
- });
+
+    if (req.secure) {
+        // request was via https, so do no special handling
+
+        next();
+    } else {
+        // request was via http, so redirect to https
+        console.log("redirect");
+        res.redirect('https://' + req.headers.host + req.url);
+    }
+});
 console.log('Server started...');
 
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
-    
+
     var query = txn.find({}, null, { limit: 10, sort: { _id: -1 } })
     query.exec(function(err, txns) {
 
@@ -116,9 +116,9 @@ app.post('/txn', function(req, res) {
 
 
 //
-//var server = app.listen(443, function() {
-//    var host = server.address().address
-//    var port = server.address().port
-//    console.log('started')
-//
-//})
+// var server = app.listen(8081, function() {
+//     var host = server.address().address
+//     var port = server.address().port
+//     console.log('started')
+
+// })

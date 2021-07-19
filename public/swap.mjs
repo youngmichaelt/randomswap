@@ -215,7 +215,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
         url = `https://api.1inch.exchange/v3.0/56/swap?fromTokenAddress=` +
             token1 + `&toTokenAddress=` +
             tokens.address + `&amount=` +
-            amountInWei + "&fee=1.5" + "&fromAddress=" + web3.eth.defaultAccount + "&slippage=1&" +
+            amountInWei + "&fee=0.95" + "&fromAddress=" + web3.eth.defaultAccount + "&slippage=1&" +
             "referrerAddress=" + feeAddress
 
 
@@ -311,7 +311,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             token2 + `&sellAmount=` +
             amountInWei + `&feeRecipient=` +
             feeAddress + `&buyTokenPercentageFee=` +
-            `0.015`
+            `0.0095`
 
 
         const web3 = new Web3(window.ethereum);

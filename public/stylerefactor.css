@@ -1,13 +1,10 @@
 @media (max-width:960px) {
     * {
         font-weight: bold;
-	border-radius: 0 !important;
-	-webkit-appearance:none;
-	opacity: 1;
-	
-
+        border-radius: 0 !important;
+        -webkit-appearance: none;
+        opacity: 1;
     }
-    
     .popup .overlay {
         position: fixed;
         top: 0px;
@@ -174,7 +171,7 @@
         font-size: 24px;
         /* position: absolute;
         bottom: 0px; */
-        left: 50vw;
+        left: 0;
         /* margin-top: 10px;
         margin-left: 10px; */
         /* padding-left: 50px; */
@@ -204,8 +201,8 @@
         position: fixed;
         bottom: 0;
         right: 0;
-        margin-bottom: 5px;
-        margin-right: 5px;
+        margin-bottom: 10px;
+        margin-right: 10px;
     }
     #gromImage {
         width: 80px;
@@ -228,8 +225,7 @@
 @media (min-width:960px) {
     * {
         font-weight: bold;
-	-webkit-appearance:none;
-
+        -webkit-appearance: none;
     }
     @font-face {
         font-family: Delicious;
@@ -354,8 +350,8 @@
         position: absolute;
         top: 0;
         right: 0;
-        margin-top: 5px;
-        margin-right: 5px;
+        margin-top: 10px;
+        margin-right: 10px;
     }
     #aboutButton {
         font-family: Delicious;
@@ -366,7 +362,7 @@
         margin-bottom: 10px;
         margin-left: 175px; */
         /* padding-left: 50px; */
-        position: absolute;
+        position: fixed;
         bottom: 0;
         left: 0;
     }
@@ -482,7 +478,7 @@ optgroup {
     /* Regular CSS rules here*/
     * {
         font-weight: bold;
-	opacity: 1;
+        opacity: 1;
     }
     .popup .overlay {
         position: fixed;
@@ -688,8 +684,8 @@ optgroup {
         position: fixed;
         bottom: 0;
         right: 0;
-        margin-bottom: 5px;
-        margin-right: 5px;
+        margin-bottom: 10px;
+        margin-right: 10px;
     }
     #gromImage {
         width: 65px;
@@ -713,7 +709,12 @@ optgroup {
         filter: brightness(75%);
         /* transform: rotate(350deg); */
     }
-    button{
+    button {
         border-radius: 0 !important;
-}
+        background: rgb(239, 239, 239);
+    }
+    select,
+    option {
+        background: white;
+    }
 }
