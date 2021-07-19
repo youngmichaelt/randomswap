@@ -5,17 +5,33 @@ function togglePopup(token) {
 
 async function popupWarning() {
 
-    web3 = new Web3(window.ethereum);
-    let accounts = await web3.eth.getAccounts();
-    // console.log(accounts.length)
-    if (accounts != null) {
-        if (accounts.length == 0) {
+    if (typeof web3 == 'undefined') {
+        popupMetaMask();
+    } else {
+        web3 = new Web3(window.ethereum);
+        let accounts = await web3.eth.getAccounts();
+        // console.log(accounts.length)
+        if (accounts != null) {
+            if (accounts.length == 0) {
 
-            popupConnection();
-        } else {
-            document.getElementById("warningPopup").classList.toggle("active");
+                popupConnection();
+            } else {
+                document.getElementById("warningPopup").classList.toggle("active");
+            }
         }
     }
+
+    // web3 = new Web3(window.ethereum);
+    // let accounts = await web3.eth.getAccounts();
+    // // console.log(accounts.length)
+    // if (accounts != null) {
+    //     if (accounts.length == 0) {
+
+    //         popupConnection();
+    //     } else {
+    //         document.getElementById("warningPopup").classList.toggle("active");
+    //     }
+    // }
 
 
 }
@@ -41,15 +57,29 @@ function popupConnection() {
 
 
 async function mmConnect() {
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    // Prompt user for account connections
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-    console.log("Account:", await signer.getAddress());
 
-    const web3 = new Web3(window.ethereum);
-    var isConnected = ethereum.isConnected();
-    console.log(isConnected);
+    if (typeof web3 == 'undefined') {
+        popupMetaMask();
+    } else {
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        // Prompt user for account connections
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        console.log("Account:", await signer.getAddress());
+
+        const web3 = new Web3(window.ethereum);
+        var isConnected = ethereum.isConnected();
+        console.log(isConnected);
+    }
+    // provider = new ethers.providers.Web3Provider(window.ethereum);
+    // // Prompt user for account connections
+    // await provider.send("eth_requestAccounts", []);
+    // const signer = provider.getSigner();
+    // console.log("Account:", await signer.getAddress());
+
+    // const web3 = new Web3(window.ethereum);
+    // var isConnected = ethereum.isConnected();
+    // console.log(isConnected);
 
 
 
@@ -93,6 +123,10 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                     response.text().then((text) => {
                         // document.getElementById('output').innerHTML = "Error: " + text;
                         document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+                        popup = document.getElementById("warningPopup").classList
+                        if (popup.contains("active")) {
+                            popupWarning();
+                        }
 
                         throw new Error(text)
                     });
@@ -119,6 +153,11 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         console.log(amount)
                         console.log('towlr')
 
+                        popup = document.getElementById("warningPopup").classList
+                        if (popup.contains("active")) {
+                            popupWarning();
+                        }
+
                         postTxn(web3.eth.defaultAccount, token1, token2, amount, "false");
 
                         // console.log(tokens.address, tokens.symbol, tokens.decimals)
@@ -134,8 +173,10 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         //function to insert data in mongodb 
                         postTxn(web3.eth.defaultAccount, token1, token2, amount, "true");
                         //closes popup warning
-                        popupWarning();
-
+                        popup = document.getElementById("warningPopup").classList
+                        if (popup.contains("active")) {
+                            popupWarning();
+                        }
                         togglePopup(token2);
                         // addToken();
 
@@ -226,6 +267,10 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
             } else {
                 data.text().then((text) => {
                     document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+                    popup = document.getElementById("warningPopup").classList
+                    if (popup.contains("active")) {
+                        popupWarning();
+                    }
 
                     throw new Error(text)
                 });
@@ -262,7 +307,10 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
 
                 console.log(amount)
-
+                popup = document.getElementById("warningPopup").classList
+                if (popup.contains("active")) {
+                    popupWarning();
+                }
                 postTxn(web3.eth.defaultAccount, tokenName, token2, ogAmount, "false");
 
                 // console.log(tokens.address, tokens.symbol, tokens.decimals)
@@ -279,8 +327,10 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 //function to insert data in mongodb 
                 postTxn(web3.eth.defaultAccount, tokenName, token2, ogAmount, "true");
                 //closes popup warning
-                popupWarning();
-
+                popup = document.getElementById("warningPopup").classList
+                if (popup.contains("active")) {
+                    popupWarning();
+                }
                 togglePopup(token2);
                 // addToken();
 
@@ -326,7 +376,10 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                     response.text().then((text) => {
                         // document.getElementById('output').innerHTML = "Error: " + text;
                         document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
-
+                        popup = document.getElementById("warningPopup").classList
+                        if (popup.contains("active")) {
+                            popupWarning();
+                        }
                         throw new Error(text)
                     });
                     throw new Error('Something went wrong');
@@ -352,6 +405,11 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         console.log(amount)
                         console.log('towlr')
 
+                        //close popup
+                        popup = document.getElementById("warningPopup").classList
+                        if (popup.contains("active")) {
+                            popupWarning();
+                        }
                         postTxn(web3.eth.defaultAccount, token1, token2, amount, "false");
 
                         // console.log(tokens.address, tokens.symbol, tokens.decimals)
@@ -369,8 +427,10 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         //function to insert data in mongodb 
                         postTxn(web3.eth.defaultAccount, token1, token2, amount, "true");
                         //closes popup warning
-                        popupWarning();
-
+                        popup = document.getElementById("warningPopup").classList
+                        if (popup.contains("active")) {
+                            popupWarning();
+                        }
                         togglePopup(token2);
                         // addToken();
 

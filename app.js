@@ -53,6 +53,8 @@ app.use(function(req, res, next) {
         res.redirect('https://' + req.headers.host + req.url);
     }
 });
+
+
 console.log('Server started...');
 
 app.use(express.static('public'));
