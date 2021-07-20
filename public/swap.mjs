@@ -1,6 +1,6 @@
 function togglePopup(token) {
     document.getElementById("popup-1").classList.toggle("active");
-    document.getElementById("popupTitle").innerHTML = "You got " + token;
+    document.getElementById("popupTitle").innerHTML = "You got: " + token;
 }
 
 async function popupWarning() {
@@ -86,7 +86,7 @@ async function mmConnect() {
 };
 
 
-async function swap(token1, token2, amount, tokens, network, decimals, tokenName) {
+async function swap(token1, token2, amount, tokens, network, decimals, tokenName, token1symbol) {
 
     if (network == "ETH") {
 
@@ -177,7 +177,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         if (popup.contains("active")) {
                             popupWarning();
                         }
-                        togglePopup(token2);
+                        togglePopup(tokenName);
                         // addToken();
 
                     }
@@ -204,7 +204,6 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
         console.log(amountInWei)
 
         //testing
-        //token1 = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 
         // const response = await fetch(
         //     //`https://ropsten.api.0x.org/swap/v1/quote?${JSON.stringify(params)}`
@@ -311,7 +310,7 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 if (popup.contains("active")) {
                     popupWarning();
                 }
-                postTxn(web3.eth.defaultAccount, tokenName, token2, ogAmount, "false");
+                postTxn(web3.eth.defaultAccount, token1symbol, token2, ogAmount, "false");
 
                 // console.log(tokens.address, tokens.symbol, tokens.decimals)
             } else {
@@ -325,13 +324,13 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
 
 
                 //function to insert data in mongodb 
-                postTxn(web3.eth.defaultAccount, tokenName, token2, ogAmount, "true");
+                postTxn(web3.eth.defaultAccount, token1symbol, token2, ogAmount, "true");
                 //closes popup warning
                 popup = document.getElementById("warningPopup").classList
                 if (popup.contains("active")) {
                     popupWarning();
                 }
-                togglePopup(token2);
+                togglePopup(tokenName);
                 // addToken();
 
             }
@@ -431,7 +430,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         if (popup.contains("active")) {
                             popupWarning();
                         }
-                        togglePopup(token2);
+                        console.log(tokenName)
+                        togglePopup(tokenName);
                         // addToken();
 
                     }
@@ -496,7 +496,7 @@ async function getTokens() {
 
         const amount = document.getElementById('amountId').value
 
-        swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, 0, "")
+        swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, 0, tokens[coinIdx2].name, "")
     }
     if (network == "BSC") {
         const response = await fetch(
@@ -538,6 +538,7 @@ async function getTokens() {
 
         for (i = 0; i < tokens.length; i++) {
             if (token1 == tokens[i].symbol) {
+
                 token1 = tokens[i].address
                 decimals = tokens[i].decimals
                 tokenName = tokens[i].symbol
@@ -550,7 +551,7 @@ async function getTokens() {
 
         const amount = document.getElementById('amountId').value
 
-        swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, decimals, tokenName)
+        swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, decimals, tokens[coinIdx2].name, tokenName)
     }
     if (network == "Ropsten") {
 
@@ -596,7 +597,7 @@ async function getTokens() {
 
         const amount = document.getElementById('amountId').value
 
-        swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, 0, "")
+        swap(token1, tokens[coinIdx2].symbol, amount, tokens[coinIdx2], network, 0, tokens[coinIdx2].name, "")
     }
 
 }
