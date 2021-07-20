@@ -4,6 +4,8 @@ function togglePopup(token) {
     document.getElementById("popupTitle").style.fontSize = "50px";
 }
 
+
+
 async function popupWarning() {
 
     if (typeof web3 == 'undefined') {
@@ -345,7 +347,6 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
     if (network == "Ropsten") {
 
 
-
         //address = "0xde336686ba638C545a46F58B3Dd46D0b9be23769";
         feeAddress = "0xfC2782122A7870811bd5864Ea9C5c67F1d48e863";
         const params = {
@@ -420,7 +421,6 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         document.getElementById('tokenAddress').innerHTML = tokens.address;
                         document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
                         document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
-
 
 
 

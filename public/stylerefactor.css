@@ -5,6 +5,9 @@
         -webkit-appearance: none;
         opacity: 1;
     }
+    #popupTitle {
+        font-size: 42px;
+    }
     .popup .overlay {
         position: fixed;
         top: 0px;
@@ -231,6 +234,9 @@
         font-family: Delicious;
         /* src: url('./LemonadeStand-J0Ln.ttf'); */
         src: url('./Trashfort-vmAX7.ttf');
+    }
+    #popupTitle {
+        font-size: 56px;
     }
     table,
     td {
