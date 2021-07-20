@@ -125,7 +125,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 } else {
                     response.text().then((text) => {
                         // document.getElementById('output').innerHTML = "Error: " + text;
-                        document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+                        // document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+                        document.getElementById('output').innerHTML = "Error occurred, please try again...";
                         popup = document.getElementById("warningPopup").classList
                         if (popup.contains("active")) {
                             popupWarning();
@@ -147,8 +148,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         console.log("error")
                         console.log(token2)
 
-                        document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
-
+                        // document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
+                        document.getElementById('output').innerHTML = "Error occurred, please try again...";
                         document.getElementById('tokenAddress').innerHTML = tokens.address;
                         document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
                         document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
@@ -268,7 +269,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 return data.json();
             } else {
                 data.text().then((text) => {
-                    document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+                    // document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+                    document.getElementById('output').innerHTML = "Error occurred, please try again...";
                     popup = document.getElementById("warningPopup").classList
                     if (popup.contains("active")) {
                         popupWarning();
@@ -302,8 +304,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 console.log("error")
                 console.log(token2)
 
-                document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
-
+                // document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
+                document.getElementById('output').innerHTML = "Error occurred, please try again...";
                 document.getElementById('tokenAddress').innerHTML = tokens.address;
                 document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
                 document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
@@ -376,7 +378,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                 } else {
                     response.text().then((text) => {
                         // document.getElementById('output').innerHTML = "Error: " + text;
-                        document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+                        // document.getElementById('output').innerHTML = "Error: " + text + "  Please try again...";
+                        document.getElementById('output').innerHTML = "Error occurred, please try again...";
                         popup = document.getElementById("warningPopup").classList
                         if (popup.contains("active")) {
                             popupWarning();
@@ -397,8 +400,8 @@ async function swap(token1, token2, amount, tokens, network, decimals, tokenName
                         console.log("error")
                         console.log(token2)
 
-                        document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
-
+                        // document.getElementById('output').innerHTML = "Error: " + error.message + "  Please try again...";
+                        document.getElementById('output').innerHTML = "Error occurred, please try again...";
                         document.getElementById('tokenAddress').innerHTML = tokens.address;
                         document.getElementById('tokenSymbol').innerHTML = tokens.symbol;
                         document.getElementById('tokenDecimals').innerHTML = tokens.decimals;
