@@ -1,6 +1,7 @@
 function togglePopup(token) {
     document.getElementById("popup-1").classList.toggle("active");
     document.getElementById("popupTitle").innerHTML = "You got: " + token;
+    document.getElementById("popupTitle").style.fontSize = "50px";
 }
 
 async function popupWarning() {
